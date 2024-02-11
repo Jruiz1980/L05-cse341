@@ -1,0 +1,30 @@
+# LOCALHOST
+GET http://localhost:8080/customers HTTP/1.1
+
+###
+POST http://localhost:8080/customers HTTP/1.1
+Content-Type: application/json
+
+{
+  "firstName": "Mario",
+  "lastName": "Cedeño",
+  "email": "m.cedeno@test.com",
+  "address": "Santiago Roldós Mz. 7418 V. 3",
+  "storeName": "Panadería Mario"
+}
+
+# RENDER
+###
+GET https://project01-whrs.onrender.com/customers HTTP/1.1
+
+###
+POST https://project01-whrs.onrender.com/customers http/1.1
+content-type:application/json
+
+{
+  "firstName": "Mario",
+  "lastName": "Cedeño",
+  "email": "m.cedeno@test.com",
+  "address": "Santiago Roldós Mz. 7418 V. 3",
+  "storeName": "Panadería Mario"
+}
