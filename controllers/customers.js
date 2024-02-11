@@ -27,7 +27,7 @@ const createCustomer = async (req, res) => {
     address: req.body.address,
     storeName: req.body.storeName
   };
-  const response = await mongodb.getDb().db().collection('customer').insertOne(customer);
+  const response = await mongodb.getDb().db().collection('customers').insertOne(customer);
   if (response.acknowledged) {
     res.status(201).json(response);
   } else {
@@ -49,7 +49,7 @@ const updateCustomer = async (req, res) => {
   const response = await mongodb
     .getDb()
     .db()
-    .collection('customer')
+    .collection('customers')
     .replaceOne({ _id: userId }, customer);
   console.log(response);
   if (response.modifiedCount > 0) {
@@ -65,7 +65,7 @@ const deleteCustomer = async (req, res) => {
   const response = await mongodb
     .getDb()
     .db()
-    .collection('customer')
+    .collection('customers')
     .deleteOne({ _id: userId }, true);
   console.log(response);
   if (response.deletedCount > 0) {
