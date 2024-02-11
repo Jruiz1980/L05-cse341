@@ -11,7 +11,7 @@
     "https"
   ],
   "paths": {
-    "/test/customers/": {
+    "/customers/": {
       "get": {
         "description": "",
         "produces": [
@@ -61,7 +61,7 @@
         }
       }
     },
-    "/test/customers/{id}": {
+    "/customers/{id}": {
       "get": {
         "description": "",
         "produces": [
