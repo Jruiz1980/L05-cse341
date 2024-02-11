@@ -33,19 +33,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstname": {
+                "firstName": {
                   "example": "any"
                 },
-                "lastname": {
+                "lastName": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
-                "favoritecolor": {
+                "address": {
                   "example": "any"
                 },
-                "birthday": {
+                "storeName": {
                   "example": "any"
                 }
               }
@@ -97,19 +97,19 @@
             "schema": {
               "type": "object",
               "properties": {
-                "firstname": {
+                "firstName": {
                   "example": "any"
                 },
-                "lastname": {
+                "lastName": {
                   "example": "any"
                 },
                 "email": {
                   "example": "any"
                 },
-                "favoritecolor": {
+                "address": {
                   "example": "any"
                 },
-                "birthday": {
+                "storeName": {
                   "example": "any"
                 }
               }

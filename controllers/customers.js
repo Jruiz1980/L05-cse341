@@ -20,11 +20,11 @@ const getSingle = async (req, res, next) => {
 
 const createCustomer = async (req, res) => {
   const customer = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
-    favoritecolor: req.body.favoritecolor,
-    birthday: req.body.birthday
+    address: req.body.address,
+    storeName: req.body.storeName
   };
   const response = await mongodb.getDb().db().collection('customer').insertOne(customer);
   if (response.acknowledged) {
@@ -35,20 +35,21 @@ const createCustomer = async (req, res) => {
 };
 
 const updateCustomer = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
+  const integer = parseInt(req.params.id);
+  const userId = new ObjectId(integer);
   // be aware of updateOne if you only want to update specific fields
-  const contact = {
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
+  const customer = {
+    firstName: req.body.firstName,
+    lastName: req.body.lastName,
     email: req.body.email,
-    favoritecolor: req.body.favoritecolor,
-    birthday: req.body.birthday
+    address: req.body.address,
+    storeName: req.body.storeName
   };
   const response = await mongodb
     .getDb()
     .db()
     .collection('customer')
-    .replaceOne({ _id: userId }, contact);
+    .replaceOne({ _id: userId }, customer);
   console.log(response);
   if (response.modifiedCount > 0) {
     res.status(204).send();
@@ -58,7 +59,8 @@ const updateCustomer = async (req, res) => {
 };
 
 const deleteCustomer = async (req, res) => {
-  const userId = new ObjectId(req.params.id);
+  const integer = parseInt(req.params.id);
+  const userId = new ObjectId(integer);
   const response = await mongodb
     .getDb()
     .db()
