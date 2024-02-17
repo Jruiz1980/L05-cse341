@@ -6,9 +6,16 @@ const saveContact = (req, res, next) => {
     lastName: 'required|string',
     email: 'required|email',
     address: 'string',
-    storeName: 'string'
+    storeName: 'required|string'
   };
-  validator(req.body, validationRule, {}, (err, status) => {
+  const validationMessages = {
+    'firstName.required': 'The first name field is required.',
+    'lastName.required': 'The last name field is required.',
+    'email.required': 'The email field is required.',
+    'email.email': 'The email field must be a valid email.'
+    
+  };
+  validator(req.body, validationRule, validationMessages, {}, (err, status) => {
     if (!status) {
       res.status(412).send({
         success: false,
