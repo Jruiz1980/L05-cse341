@@ -15,6 +15,9 @@ const saveContact = (req, res, next) => {
     'email.email': 'The email field must be a valid email.'
     
   };
+
+  let validator = new Validator(req.body, validationRules, validationMessages);
+  
   validator(req.body, validationRule, validationMessages, {}, (err, status) => {
     if (!status) {
       res.status(412).send({

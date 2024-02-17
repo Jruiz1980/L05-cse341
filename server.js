@@ -13,8 +13,19 @@ app
   })
   .use('/', require('./routes'));
 
-process.on('uncaughtException', (err, origin) => {
+/*process.on('uncaughtException', (err, origin) => {
   console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+});*/
+
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
+process.on('unhandledRejection', (reason, promise) => {
+  console.log('Unhandled Rejection at:', promise, 'reason:', reason);
+
 });
 
 mongodb.initDb((err, mongodb) => {

@@ -7,14 +7,17 @@ function Validator(body, rules, customMessages) {
 }
 
 Validator.prototype.passes = function (callback) {
-  // Lógica de validación exitosa
   let isValid = true;
-  this.rules.forEach((rule) => {
-    const [field, validation] = rule.split('|');
-    if (validation === 'required' && !this.body[field]) {
-      this.errors[field] = `${field} es un campo requerido.`;
-      isValid = false;
-    }
+  Object.entries(this.rules).forEach(([field, rule]) => {
+    const validations = rule.split('|');
+    validations.forEach((validation) => {
+      if (validation === 'required' && !this.body[field]) {
+        this.errors[field] =
+          this.customMessages[`${field}.required`] || `${field} es un campo requerido.`;
+        isValid = false;
+      }
+      // Aquí puedes continuar con más validaciones (email, string, etc.)
+    });
   });
 
   if (isValid) {
@@ -25,7 +28,6 @@ Validator.prototype.passes = function (callback) {
 };
 
 Validator.prototype.fails = function (callback) {
-  // Lógica de validación fallida
   this.passes((errors, status) => {
     if (!status) {
       callback(errors, false);
