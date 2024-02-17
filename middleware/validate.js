@@ -1,6 +1,6 @@
 const validator = require('../helpers/validate');
 
-const saveContact = (req, res, next) => {
+const createCustomer = (req, res, next) => {
   const validationRule = {
     firstName: 'required|string',
     lastName: 'required|string',
@@ -22,5 +22,5 @@ const saveContact = (req, res, next) => {
 };
 
 module.exports = {
-  saveContact
+  createCustomer
 };
