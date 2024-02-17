@@ -29,6 +29,7 @@
     "nodemon": "^3.0.3",
     "prettier": "^3.2.5",
     "swagger-autogen": "^2.23.7",
-    "swagger-ui-express": "^5.0.0"
+    "swagger-ui-express": "^5.0.0",
+    "validatorjs": "^3.22.1"
   }
 }
