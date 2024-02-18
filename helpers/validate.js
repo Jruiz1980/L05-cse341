@@ -1,8 +1,25 @@
-const Validator = require('validatorjs');
-const validator = (body, rules, customMessages, callback) => {
-  const validation = new Validator(body, rules, customMessages);
-  validation.passes(() => callback(null, true));
-  validation.fails(() => callback(validation.errors, false));
+
+
+let data = {
+  firstName: 'string',
+  lastName: 'string',
+  email: 'email',
+  address: 'string',
+  storeName: 'string'
 };
-console.log(Validator);
-module.exports = validator;
+
+const rules = {
+  firstName: 'required',
+  lastName: 'required',
+  email: 'required|email',
+  address: 'required',
+  storeName: 'required'
+};
+
+
+if (validation.passes()) {
+  return null
+} else {
+  let errors = validation.errors.all();
+  return errors;
+}

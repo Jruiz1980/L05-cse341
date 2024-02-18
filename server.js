@@ -19,7 +19,8 @@ app
 
 
 app.use((err, req, res, next) => {
-  console.error(err.stack);
+  console.error('Error message: ', err.message);
+  console.error('Stack trace: ', err.stack);
   res.status(500).send('Something broke!');
 });
 

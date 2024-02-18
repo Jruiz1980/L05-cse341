@@ -1,3 +1,4 @@
+const {body, validationResult} = require('express-validator')
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
@@ -32,49 +33,22 @@ const getSingle = async (req, res, next) => {
   }
 };
 
-const createCustomer = async (req, res) => {
-  const customer = {
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    address: req.body.address,
-    storeName: req.body.storeName
-  };
+const createCustomer = [
+  body('firstName').notEmpty().withMessage('The first name field is required.'),
+  body('lastName').notEmpty().withMessage('The last name field is required.'),
+  body('email').isEmail().withMessage('The email field must be a valid email.'),
+  body('address').optional().isString(),
+  body('storeName').notEmpty().withMessage('The store name field is required.'),
 
-  try {
-    await new Promise((resolve, reject) => {
-      validator(req.body, validationRule, validationMessages, {}, (err, status) => {
-        if (!status) {
-          res.status(412).send({
-            success: false,
-            message: 'Validation failed',
-            data: err
-          });
-          reject();
-        } else {
-          resolve();
-        }
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: errors.array()
       });
-    });
-
-    const response = await mongodb.getDb().db().collection('customers').insertOne(customer);
-    if (response.acknowledged) {
-      res.status(201).json(response);
-    } else {
-      res.status(500).json(response.error || 'Some error occurred while creating the contact.');
     }
-  } catch (err) {
-    res.status(500).json(err.message || 'Some error occurred while creating the contact.');
-  }
-};
-
-const updateCustomer = async (req, res) => {
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid contact id to update a contact.');
-    }
-    const integer = parseInt(req.params.id);
-    const userId = new ObjectId(integer);
 
     const customer = {
       firstName: req.body.firstName,
@@ -84,23 +58,67 @@ const updateCustomer = async (req, res) => {
       storeName: req.body.storeName
     };
 
-    const response = await mongodb
-      .getDb()
-      .db()
-      .collection('customers')
-      .replaceOne({ _id: userId }, customer);
-
-    console.log(response);
-
-    if (response.modifiedCount > 0) {
-      res.status(204).send();
-    } else {
-      res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+    try {
+      const response = await mongodb.getDb().db().collection('customers').insertOne(customer);
+      if (response.acknowledged) {
+        res.status(201).json(response);
+      } else {
+        res.status(500).json(response.error || 'Some error occurred while creating the contact.');
+      }
+    } catch (err) {
+      res.status(500).json(err.message || 'Some error occurred while creating the contact.');
     }
-  } catch (error) {
-    res.status(500).json(error.message || 'Some error occurred while updating the contact.');
   }
-};
+];
+
+const updateCustomer = [
+  body('firstName').notEmpty().withMessage('The first name field is required.'),
+  body('lastName').notEmpty().withMessage('The last name field is required.'),
+  body('email').isEmail().withMessage('The email field must be a valid email.'),
+  body('address').optional().isString(),
+  body('storeName').notEmpty().withMessage('The store name field is required.'),
+
+  async (req, res) => {
+    if (!ObjectId.isValid(req.params.id)) {
+      res.status(400).json('Must use a valid contact id to update a contact.');
+    }
+    const integer = parseInt(req.params.id);
+    const userId = new ObjectId(integer);
+
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(412).send({
+        success: false,
+        message: 'Validation failed',
+        data: errors.array()
+      });
+    }
+
+    const customer = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+      storeName: req.body.storeName
+    };
+
+    try {
+      const response = await mongodb
+        .getDb()
+        .db()
+        .collection('customers')
+        .replaceOne({ _id: userId }, customer);
+
+      if (response.modifiedCount > 0) {
+        res.status(204).send();
+      } else {
+        res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+      }
+    } catch (error) {
+      res.status(500).json(error.message || 'Some error occurred while updating the contact.');
+    }
+  }
+];
 
 const deleteCustomer = async (req, res) => {
   try {
