@@ -1,6 +1,6 @@
 const {body, validationResult} = require('express-validator')
 const mongodb = require('../db/connect');
-const ObjectId = require('mongodb').ObjectId;
+const {ObjectId} = require('mongodb');
 
 const getAll = async (req, res, next) => {
   try {
@@ -16,7 +16,7 @@ const getSingle = async (req, res, next) => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to find a contact.');
   }
-  const integer = parseInt(req.params.id);
+  const integer = req.params.id;
   const userId = new ObjectId(integer);
 
   try {
@@ -79,11 +79,11 @@ const updateCustomer = [
   body('storeName').notEmpty().withMessage('The store name field is required.'),
 
   async (req, res) => {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid contact id to update a contact.');
+    const userId = req.params.id;
+
+    if (!ObjectId.isValid(userId)) {
+      return res.status(400).json({ message: 'Must use a valid contact id to update a contact.' });
     }
-    const integer = parseInt(req.params.id);
-    const userId = new ObjectId(integer);
 
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -94,28 +94,33 @@ const updateCustomer = [
       });
     }
 
-    const customer = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      address: req.body.address,
-      storeName: req.body.storeName
-    };
+    const customer = {};
+    if (req.body.firstName) customer.firstName = req.body.firstName;
+    if (req.body.lastName) customer.lastName = req.body.lastName;
+    if (req.body.email) customer.email = req.body.email;
+    if (req.body.address) customer.address = req.body.address;
+    if (req.body.storeName) customer.storeName = req.body.storeName;
 
     try {
       const response = await mongodb
         .getDb()
         .db()
         .collection('customers')
-        .replaceOne({ _id: userId }, customer);
+        .updateOne({ _id: new ObjectId(userId) }, { $set: customer });
 
       if (response.modifiedCount > 0) {
         res.status(204).send();
       } else {
-        res.status(500).json(response.error || 'Some error occurred while updating the contact.');
+        return res
+          .status(500)
+          .json({ message: 'Error: No contact was updated.', details: response });
       }
     } catch (error) {
-      res.status(500).json(error.message || 'Some error occurred while updating the contact.');
+      console.log(error);
+      return res.status(500).json({
+        message: 'Some error occurred while updating the contact.',
+        error: error.toString()
+      });
     }
   }
 ];
@@ -125,7 +130,7 @@ const deleteCustomer = async (req, res) => {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json('Must use a valid contact id to delete a contact.');
     }
-    const integer = parseInt(req.params.id);
+    const integer = req.params.id;
     const userId = new ObjectId(integer);
 
     const response = await mongodb
