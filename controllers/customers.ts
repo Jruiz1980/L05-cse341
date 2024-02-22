@@ -1,12 +1,13 @@
 import { Request, Response, NextFunction } from 'express';
 import { body, validationResult } from 'express-validator';
 import { ObjectId } from 'mongodb';
-import mongodb from '../db/connect';
+import { getDb } from '../db/connect';
+const mongodb = { getDb };
 
 
 const getAll = async (req: Request, res: Response): Promise<void> => {
   try {
-    const result = await mongodb.getDb().db().collection('customers').find().toArray();
+    const result = await mongodb.getDb().collection('customers').find().toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {
@@ -21,7 +22,7 @@ const getSingle = async (req: Request, res: Response): Promise<void> => {
   const integer = req.params.id;
   const userId = new ObjectId(integer);
   try {
-    const result = await mongodb.getDb().db().collection('customers').find({ _id: userId }).toArray();
+    const result = await mongodb.getDb().collection('customers').find({ _id: userId }).toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result[0]);
   } catch (err) {
@@ -38,11 +39,12 @@ const createCustomer = [
   async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(412).send({
+     res.status(412).send({
         success: false,
         message: 'Validation failed',
         data: errors.array()
       });
+      return;
     }
     const customer = {
       firstName: req.body.firstName,
@@ -52,12 +54,10 @@ const createCustomer = [
       storeName: req.body.storeName
     };
     try {
-      const response = await mongodb.getDb().db().collection('customers').insertOne(customer);
+      const response = await mongodb.getDb().collection('customers').insertOne(customer);
       if (response.acknowledged) {
         res.status(201).json(response);
-      } else {
-        res.status(500).json(response.error || 'Some error occurred while creating the contact.');
-      }
+      } 
     } catch (err) {
       res.status(500).json(err.message || 'Some error occurred while creating the contact.');
     }
@@ -73,15 +73,17 @@ const updateCustomer = [
   async (req: Request, res: Response): Promise<void> => {
     const userId = req.params.id;
     if (!ObjectId.isValid(userId)) {
-      return res.status(400).json({ message: 'Must use a valid contact id to update a contact.' });
+      res.status(400).json({ message: 'Must use a valid contact id to update a contact.' });
+      return;
     }
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(412).send({
+      res.status(412).send({
         success: false,
         message: 'Validation failed',
         data: errors.array()
       });
+      return;
     }
     const customer: any = {};
     if (req.body.firstName) customer.firstName = req.body.firstName;
@@ -90,15 +92,15 @@ const updateCustomer = [
     if (req.body.address) customer.address = req.body.address;
     if (req.body.storeName) customer.storeName = req.body.storeName;
     try {
-      const response = await mongodb.getDb().db().collection('customers').updateOne({ _id: new ObjectId(userId) }, { $set: customer });
+      const response = await mongodb.getDb().collection('customers').updateOne({ _id: new ObjectId(userId) }, { $set: customer });
       if (response.modifiedCount > 0) {
         res.status(204).send();
       } else {
-        return res.status(500).json({ message: 'Error: No contact was updated.', details: response });
+        res.status(500).json({ message: 'Error: No contact was updated.', details: response });
       }
     } catch (error) {
       console.log(error);
-      return res.status(500).json({
+      res.status(500).json({
         message: 'Some error occurred while updating the contact.',
         error: error.toString()
       });
@@ -110,15 +112,16 @@ const deleteCustomer = async (req: Request, res: Response): Promise<void> => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json('Must use a valid contact id to delete a contact.');
+      return;
     }
     const integer = req.params.id;
     const userId = new ObjectId(integer);
-    const response = await mongodb.getDb().db().collection('customers').deleteOne({ _id: userId }, true);
+    const response = await mongodb.getDb().collection('customers').deleteOne({ _id: userId });
     console.log(response);
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
-      res.status(500).json(response.error || 'Some error occurred while deleting the contact.');
+      res.status(404).json('No contact found to delete.');
     }
   } catch (error) {
     res.status(500).json(error.message || 'Some error occurred while deleting the contact.');
