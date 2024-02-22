@@ -2,9 +2,11 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var bodyParser = require("body-parser");
+var dotenv = require("dotenv");
 var mongodb = require("./db/connect");
 var port = process.env.PORT || 8080;
 var app = express();
+dotenv.config();
 app
     .use(bodyParser.json())
     .use(function (req, res, next) {

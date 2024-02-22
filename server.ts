@@ -1,6 +1,6 @@
 import express = require('express');
 import bodyParser = require('body-parser');
-import dotenv =                                                             require('dotenv');
+import dotenv = require('dotenv');
 import * as mongodb from './db/connect';
 
 const port: string | number = process.env.PORT || 8080;
