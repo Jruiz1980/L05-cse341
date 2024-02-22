@@ -6,14 +6,13 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build":"tsc ./server.ts",
-    "built":"tsc ./swagger.ts",
-    "start": "node ./server.cjs",
-    "dev": "nodemon ./server.cjs",
+    "build": "tsc",
+    "start": "node ./dist/server.cjs",
+    "dev": "nodemon ./dist/server.cjs",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "swagger": "node ./swagger.cjs"
+    "swagger": "node ./dist/swagger.cjs"
   },
   "keywords": [],
   "author": "",

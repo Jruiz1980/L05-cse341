@@ -1,5 +1,5 @@
-var swaggerAutogen = require('swagger-autogen');
-var doc = {
+const swaggerAutogen = require('swagger-autogen');
+const doc = {
     info: {
         title: 'My API Customers',
         description: 'Customers API',
@@ -7,9 +7,10 @@ var doc = {
     host: 'project01-whrs.onrender.com',
     schemes: ['https'],
 };
-var outputFile = './swagger.json';
-var endpointsFiles = ['./routes/index.ts'];
+const outputFile = './swagger.json';
+const endpointsFiles = ['./routes/index.ts'];
 swaggerAutogen()(outputFile, endpointsFiles, doc)
-    .then(function () {
+    .then(() => {
     console.log("Documentation successfully generated!");
 });
+//# sourceMappingURL=swagger.js.map

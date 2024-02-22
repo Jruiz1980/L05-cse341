@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var bodyParser = require("body-parser");
 var mongodb = require("./db/connect");
@@ -29,3 +30,4 @@ mongodb.initDb(function (err) {
         console.log("Connected to DB and listening on ".concat(port));
     }
 });
+//# sourceMappingURL=server.cjs.map
