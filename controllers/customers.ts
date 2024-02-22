@@ -1,8 +1,10 @@
-const {body, validationResult} = require('express-validator')
-const mongodb = require('../db/connect');
-const {ObjectId} = require('mongodb');
+import { Request, Response, NextFunction } from 'express';
+import { body, validationResult } from 'express-validator';
+import { ObjectId } from 'mongodb';
+import mongodb from '../db/connect';
 
-const getAll = async (req, res, next) => {
+
+const getAll = async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await mongodb.getDb().db().collection('customers').find().toArray();
     res.setHeader('Content-Type', 'application/json');
@@ -12,20 +14,14 @@ const getAll = async (req, res, next) => {
   }
 };
 
-const getSingle = async (req, res, next) => {
+const getSingle = async (req: Request, res: Response): Promise<void> => {
   if (!ObjectId.isValid(req.params.id)) {
     res.status(400).json('Must use a valid contact id to find a contact.');
   }
   const integer = req.params.id;
   const userId = new ObjectId(integer);
-
   try {
-    const result = await mongodb
-      .getDb()
-      .db()
-      .collection('customers')
-      .find({ _id: userId })
-      .toArray();
+    const result = await mongodb.getDb().db().collection('customers').find({ _id: userId }).toArray();
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result[0]);
   } catch (err) {
@@ -39,8 +35,7 @@ const createCustomer = [
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
-
-  async (req, res) => {
+  async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(412).send({
@@ -49,7 +44,6 @@ const createCustomer = [
         data: errors.array()
       });
     }
-
     const customer = {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
@@ -57,7 +51,6 @@ const createCustomer = [
       address: req.body.address,
       storeName: req.body.storeName
     };
-
     try {
       const response = await mongodb.getDb().db().collection('customers').insertOne(customer);
       if (response.acknowledged) {
@@ -77,14 +70,11 @@ const updateCustomer = [
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
-
-  async (req, res) => {
+  async (req: Request, res: Response): Promise<void> => {
     const userId = req.params.id;
-
     if (!ObjectId.isValid(userId)) {
       return res.status(400).json({ message: 'Must use a valid contact id to update a contact.' });
     }
-
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(412).send({
@@ -93,27 +83,18 @@ const updateCustomer = [
         data: errors.array()
       });
     }
-
-    const customer = {};
+    const customer: any = {};
     if (req.body.firstName) customer.firstName = req.body.firstName;
     if (req.body.lastName) customer.lastName = req.body.lastName;
     if (req.body.email) customer.email = req.body.email;
     if (req.body.address) customer.address = req.body.address;
     if (req.body.storeName) customer.storeName = req.body.storeName;
-
     try {
-      const response = await mongodb
-        .getDb()
-        .db()
-        .collection('customers')
-        .updateOne({ _id: new ObjectId(userId) }, { $set: customer });
-
+      const response = await mongodb.getDb().db().collection('customers').updateOne({ _id: new ObjectId(userId) }, { $set: customer });
       if (response.modifiedCount > 0) {
         res.status(204).send();
       } else {
-        return res
-          .status(500)
-          .json({ message: 'Error: No contact was updated.', details: response });
+        return res.status(500).json({ message: 'Error: No contact was updated.', details: response });
       }
     } catch (error) {
       console.log(error);
@@ -125,22 +106,15 @@ const updateCustomer = [
   }
 ];
 
-const deleteCustomer = async (req, res) => {
+const deleteCustomer = async (req: Request, res: Response): Promise<void> => {
   try {
     if (!ObjectId.isValid(req.params.id)) {
       res.status(400).json('Must use a valid contact id to delete a contact.');
     }
     const integer = req.params.id;
     const userId = new ObjectId(integer);
-
-    const response = await mongodb
-      .getDb()
-      .db()
-      .collection('customers')
-      .deleteOne({ _id: userId }, true);
-
+    const response = await mongodb.getDb().db().collection('customers').deleteOne({ _id: userId }, true);
     console.log(response);
-
     if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
@@ -151,10 +125,4 @@ const deleteCustomer = async (req, res) => {
   }
 };
 
-module.exports = {
-  getAll,
-  getSingle,
-  createCustomer,
-  updateCustomer,
-  deleteCustomer
-};
+export { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer }
