@@ -1,4 +1,4 @@
-import dotenv from 'dotenv';
+import dotenv = require('dotenv');
 import { MongoClient, Db } from 'mongodb';
 
 dotenv.config();

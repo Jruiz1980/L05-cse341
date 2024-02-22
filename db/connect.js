@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getDb = exports.initDb = void 0;
-var dotenv_1 = require("dotenv");
+var dotenv = require("dotenv");
 var mongodb_1 = require("mongodb");
-dotenv_1.default.config();
+dotenv.config();
 var _db;
 var initDb = function (callback) {
     if (_db) {
