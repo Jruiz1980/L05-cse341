@@ -1,6 +1,7 @@
 import express = require('express');
 import bodyParser = require('body-parser');
 import * as mongodb from './db/connect';
+import routes from './routes';
 
 const port: string | number = process.env.PORT || 8080;
 const app = express();
@@ -11,7 +12,7 @@ app
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
-  .use('/', require('./routes'));
+  .use('/', routes);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error message: ', err.message);

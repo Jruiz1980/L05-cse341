@@ -1,9 +1,9 @@
-import express, { Router } from 'express';
+import * as express from 'express';
 import { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer } from '../controllers/customers';
 
 import { validations, handleValidationErrors } from '../middleware/validate';
 
-const router: Router = express.Router();
+const router: express.Router = express.Router();
 
 router.get('/', getAll);
 router.get('/:id', getSingle);

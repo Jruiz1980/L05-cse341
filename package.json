@@ -3,16 +3,16 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc",
-    "start": "node ./dist/server.cjs",
-    "dev": "nodemon ./dist/server.cjs",
+    "build": "tsc && copy swagger.json dist\\",
+    "start": "tsc server.ts -m commonjs -t es2017 --outDir ./dist && node ./dist/server.js",
+    "dev": "nodemon ./dist/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
-    "swagger": "node ./dist/swagger.cjs"
+    "swagger": "node ./dist/swagger.js"
   },
   "keywords": [],
   "author": "",
