@@ -1,7 +1,22 @@
 import express = require('express');
 import bodyParser = require('body-parser');
+import { ApolloServer, gql } from 'apollo-server-express';
 import * as mongodb from './db/connect';
 import routes from './routes';
+
+const typeDefs = gql`
+  type Query {
+    hello: String
+  }
+`;
+
+const resolvers = {
+  Query: {
+    hello: () => 'Hello from GraphQL!'
+  }
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
 
 const port: string | number = process.env.PORT || 8080;
 const app = express();
@@ -11,8 +26,11 @@ app
   .use((req: express.Request, res: express.Response, next: express.NextFunction) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
-  })
-  .use('/', routes);
+  });
+
+server.applyMiddleware({ app });
+
+app.use('/', routes);
 
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error message: ', err.message);
