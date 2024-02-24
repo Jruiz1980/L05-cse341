@@ -2,8 +2,20 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const express = require("express");
 const bodyParser = require("body-parser");
+const apollo_server_express_1 = require("apollo-server-express");
 const mongodb = require("./db/connect");
 const routes_1 = require("./routes");
+const typeDefs = (0, apollo_server_express_1.gql) `
+  type Query {
+    hello: String
+  }
+`;
+const resolvers = {
+    Query: {
+        hello: () => 'Hello from GraphQL!'
+    }
+};
+const server = new apollo_server_express_1.ApolloServer({ typeDefs, resolvers });
 const port = process.env.PORT || 8080;
 const app = express();
 app
@@ -11,8 +23,9 @@ app
     .use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
-})
-    .use('/', routes_1.default);
+});
+server.applyMiddleware({ app });
+app.use('/', routes_1.default);
 app.use((err, req, res, next) => {
     console.error('Error message: ', err.message);
     console.error('Stack trace: ', err.stack);
