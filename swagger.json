@@ -1,14 +1,14 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API Customers",
-    "description": "Customers API",
+    "title": "My API Customers TS",
+    "description": "Customers API using Typescript",
     "version": "1.0.0"
   },
-  "host": "localhost:8080",
+  "host": "project01-whrs.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http"
+    "https"
   ],
   "paths": {
     "/customers/": {
