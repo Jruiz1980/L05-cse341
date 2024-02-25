@@ -5,10 +5,10 @@
     "description": "Customers API",
     "version": "1.0.0"
   },
-  "host": "project01-whrs.onrender.com",
+  "host": "localhost:8080",
   "basePath": "/",
   "schemes": [
-    "https"
+    "http"
   ],
   "paths": {
     "/customers/": {
