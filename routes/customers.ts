@@ -1,5 +1,11 @@
 import * as express from 'express';
-import { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer } from '../controllers/customers';
+import {
+  getAll,
+  getSingle,
+  createCustomer,
+  updateCustomer,
+  deleteCustomer
+} from '../controllers/customers';
 
 import { validations, handleValidationErrors } from '../middleware/validate';
 

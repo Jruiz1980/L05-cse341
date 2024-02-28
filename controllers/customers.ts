@@ -4,7 +4,6 @@ import { ObjectId } from 'mongodb';
 import { getDb } from '../db/connect';
 const mongodb = { getDb };
 
-
 const getAll = async (req: Request, res: Response): Promise<void> => {
   try {
     const result = await mongodb.getDb().collection('customers').find().toArray();
@@ -39,7 +38,7 @@ const createCustomer = [
   async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-     res.status(412).send({
+      res.status(412).send({
         success: false,
         message: 'Validation failed',
         data: errors.array()
@@ -57,7 +56,7 @@ const createCustomer = [
       const response = await mongodb.getDb().collection('customers').insertOne(customer);
       if (response.acknowledged) {
         res.status(201).json(response);
-      } 
+      }
     } catch (err) {
       res.status(500).json(err.message || 'Some error occurred while creating the contact.');
     }
@@ -92,7 +91,10 @@ const updateCustomer = [
     if (req.body.address) customer.address = req.body.address;
     if (req.body.storeName) customer.storeName = req.body.storeName;
     try {
-      const response = await mongodb.getDb().collection('customers').updateOne({ _id: new ObjectId(userId) }, { $set: customer });
+      const response = await mongodb
+        .getDb()
+        .collection('customers')
+        .updateOne({ _id: new ObjectId(userId) }, { $set: customer });
       if (response.modifiedCount > 0) {
         res.status(204).send();
       } else {
@@ -128,4 +130,4 @@ const deleteCustomer = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-export { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer }
+export { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer };

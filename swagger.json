@@ -7,16 +7,12 @@
   },
   "host": "project01-whrs.onrender.com",
   "basePath": "/",
-  "schemes": [
-    "https"
-  ],
+  "schemes": ["https"],
   "paths": {
     "/customers/": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "responses": {
           "200": {
             "description": "OK"
@@ -70,9 +66,7 @@
     "/customers/{id}": {
       "get": {
         "description": "",
-        "produces": [
-          "application/json"
-        ],
+        "produces": ["application/json"],
         "parameters": [
           {
             "name": "id",
