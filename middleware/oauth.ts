@@ -15,7 +15,7 @@ const isValidToken = (token: string): boolean => {
 
   
   // Aquí, reemplaza 'your_secret_key' con tu clave secreta real utilizada para firmar los tokens.
-  const secretKey = 'your_secret_key';
+  const secretKey = 'AjcoSaPc5S77Lgc8JlUE1lnc+Oy5xQ7aP3gjEl39xjs=';
 
   try {
     // Verifica el token usando tu clave secreta.
