@@ -14,8 +14,8 @@ const doc = {
       tokenUrl: 'https://tu-servidor-de-autenticacion.com/token',
       flow: 'accessCode',
       scopes: {
-        'read:customers': 'leer datos de clientes',
-        'write:customers': 'modificar datos de clientes'
+        'read:customers': 'Read data client',
+        'write:customers': 'Modify data client'
       }
     }
   },
