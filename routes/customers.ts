@@ -8,7 +8,7 @@ import {
 } from '../controllers/customers';
 
 import { validations, handleValidationErrors } from '../middleware/validate';
-import { validateOAuthToken } from '../middleware/oauth';
+
 
 const router: express.Router = express.Router();
 
@@ -18,6 +18,5 @@ router.post('/', validations, handleValidationErrors, createCustomer);
 router.put('/:id', validations, handleValidationErrors, updateCustomer);
 router.delete('/:id', deleteCustomer);
 
-router.get('/', validateOAuthToken, getAll);
 
 export default router;

@@ -34,14 +34,16 @@
     "lint": "^0.8.19",
     "mongodb": "^6.4.0",
     "mongoose": "^8.2.0",
+    "morgan": "^1.10.0",
     "nodemon": "^3.1.0",
     "oauth2-server": "^3.1.1",
+    "passport-google-oauth20": "^2.0.0",
     "prettier": "^3.2.5",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0",
     "validation": "^0.0.1",
     "validatorjs": "^3.22.1",
-    "winston": "^3.11.0"
+    "winston": "^3.12.0"
   },
   "devDependencies": {
     "@types/body-parser": "^1.19.5",
@@ -49,6 +51,7 @@
     "@types/express-jwt": "^7.4.2",
     "@types/jest": "^29.5.12",
     "@types/jsonwebtoken": "^9.0.6",
+    "@types/morgan": "^1.9.9",
     "@types/node": "^20.11.24",
     "@types/react": "^18.2.61",
     "@types/react-dom": "^18.2.19",
