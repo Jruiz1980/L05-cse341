@@ -38,7 +38,7 @@ const User = mongoose.model<IUser>('User', userSchema);
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID as string,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    callbackURL: "https://project01-whrs.onrender.com/api-docs/auth/google/"
+    callbackURL: "https://project01-whrs.onrender.com/auth/google/"
   },
   async (accessToken, refreshToken, profile: Profile, cb) => {
     try {
@@ -66,7 +66,7 @@ passport.serializeUser((user: any, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err, user) => {
+  User.findById(id, (err: any, user: IUser) => {
     done(err, user as IUser);
   });
 });

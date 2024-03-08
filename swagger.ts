@@ -5,7 +5,7 @@ const doc = {
     title: 'My API Customers',
     description: 'Customers API',
   },
-  host: 'project01-whrs.onrender.com/api-docs',
+  host: 'project01-whrs.onrender.com',
   schemes: ['https'],
   securityDefinitions: {
     OAuth2: {

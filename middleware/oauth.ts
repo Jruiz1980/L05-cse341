@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://project01-whrs.onrender.com/api-docs",
+      callbackURL: "https://project01-whrs.onrender.com/auth/google",
     },
     function(accessToken, refreshToken, profile, done) {
       const response = emails.includes(profile.emails[0].value);

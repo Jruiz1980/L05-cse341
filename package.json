@@ -6,9 +6,9 @@
   "type": "commonjs",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && copy swagger.json dist\\",
-    "start": "tsc server.ts -m commonjs -t es2017 --outDir ./dist --resolveJsonModule && node ./dist/server.js",
-    "dev": "nodemon ./dist/server.js",
+    "build": "tsc && shx cp swagger.json dist/",
+    "start": "node ./dist/server.js",
+    "dev": "nodemon --exec ts-node server.ts",
     "lint": "eslint .",
     "lint:fix": "eslint --fix",
     "format": "prettier --write './**/*.{js,jsx,ts,tsx,css,md,json}' --config ./.prettierrc",
@@ -36,8 +36,10 @@
     "passport": "^0.7.0",
     "passport-google-oauth20": "^2.0.0",
     "prettier": "^3.2.5",
+    "shx": "^0.3.4",
     "swagger-autogen": "^2.23.7",
     "swagger-ui-express": "^5.0.0",
+    "ts-node": "^10.9.2",
     "validation": "^0.0.1",
     "validatorjs": "^3.22.1"
   },

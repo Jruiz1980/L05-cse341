@@ -13,5 +13,5 @@
     "allowJs": true,
     "declaration": true
   },
-  "include": ["*", "controllers/*", "db/*", "middleware/*", "routes/*"]
+  "include": ["*", "controllers/*", "db/*", "middleware/*", "routes/*", "models/*"]
 }
