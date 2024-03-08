@@ -4,7 +4,8 @@ import * as mongodb from './db/connect';
 import routes from './routes';
 import morgan = require('morgan');
 import { loginRouter } from './routes/oauth';
-import passport from 'passport';
+import "./middleware/oauth";
+import * as passport from 'passport';
 
 const port: string | number = process.env.PORT || 8080;
 const app = express();
@@ -19,9 +20,18 @@ app
   })
   .use('/', routes);
 
-app.use("/auth", loginRouter);
 app.use(passport.initialize());
-
+app.use(
+  "/auth",
+  passport.authenticate("auth-google", {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email",
+    ],
+    session: false,
+  }),
+  loginRouter
+);
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error message: ', err.message);
   console.error('Stack trace: ', err.stack);

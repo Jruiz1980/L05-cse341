@@ -10,19 +10,12 @@ const doc = {
   securityDefinitions: {
     OAuth2: {
       type: 'oauth2',
-      authorizationUrl: 'https://tu-servidor-de-autenticacion.com/auth',
-      tokenUrl: 'https://tu-servidor-de-autenticacion.com/token',
-      flow: 'accessCode',
-      scopes: {
-        'read:customers': 'Read data client',
-        'write:customers': 'Modify data client'
-      }
+      authorizationUrl: 'https://project01-whrs.onrender.com/oauth/authorize',
+      flow: 'implicit',
+      scopes: {}
     }
-  },
-  security: [{
-    OAuth2: ['read:customers', 'write:customers']
-  }]
-};
+  }
+}
 
 const outputFile = './swagger.json';
 const endpointsFiles = ['./routes/index.ts'];

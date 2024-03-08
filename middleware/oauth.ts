@@ -1,11 +1,12 @@
-import {use} from 'passport';
+import * as passport from 'passport';
 import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 dotenv.config();
 
 const emails = ["johnathanruiz@gamil.com"];
 
-use(
+passport.use(
+  "auth-google",
   new GoogleStrategy(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
@@ -21,5 +22,6 @@ use(
         emails.push(profile.emails[0].value);
         done(null, profile)
       }
-        })
+    }
   )
+)
