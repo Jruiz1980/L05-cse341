@@ -10,7 +10,7 @@ const doc = {
   securityDefinitions: {
     OAuth2: {
       type: 'oauth2',
-      authorizationUrl: 'https://project01-whrs.onrender.com/oauth/authorize',
+      authorizationUrl: 'https://project01-whrs.onrender.com/auth/google',
       flow: 'implicit',
       scopes: {}
     }
