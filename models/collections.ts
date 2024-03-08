@@ -2,7 +2,7 @@
 
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import passport from 'passport';
+import * as passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { Profile } from 'passport-google-oauth20';
 import { Document } from 'mongoose';

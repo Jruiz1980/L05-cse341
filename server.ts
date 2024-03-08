@@ -1,5 +1,5 @@
 import express = require('express');
-import session from 'express-session';
+import session = require('express-session');
 import bodyParser = require('body-parser');
 import * as mongodb from './db/connect';
 import routes from './routes';
