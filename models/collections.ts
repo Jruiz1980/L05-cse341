@@ -38,7 +38,7 @@ const User = mongoose.model<IUser>('User', userSchema);
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID as string,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "https://project01-whrs.onrender.com/api-docs/auth/google/"
   },
   async (accessToken, refreshToken, profile: Profile, cb) => {
     try {
