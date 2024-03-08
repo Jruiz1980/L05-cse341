@@ -3,7 +3,7 @@ import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
 import * as dotenv from 'dotenv';
 dotenv.config();
 
-const emails = ["johnathanruiz@gamil.com"];
+const emails = ["johnathanruiz@gmail.com"];
 
 passport.use(
   "auth-google",
@@ -11,7 +11,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://project01-whrs.onrender.com",
+      callbackURL: "https://project01-whrs.onrender.com/api-docs/",
     },
     function(accessToken, refreshToken, profile, done) {
       const response = emails.includes(profile.emails[0].value);
