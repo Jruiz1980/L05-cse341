@@ -1,18 +1,30 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "My API Customers TS",
-    "description": "Customers API using Typescript",
+    "title": "My API Customers",
+    "description": "Customers API",
     "version": "1.0.0"
   },
   "host": "project01-whrs.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": [
+    "https"
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "authorizationUrl": "https://project01-whrs.onrender.com/auth/google",
+      "flow": "implicit",
+      "scopes": {}
+    }
+  },
   "paths": {
     "/customers/": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -66,7 +78,9 @@
     "/customers/{id}": {
       "get": {
         "description": "",
-        "produces": ["application/json"],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "id",
