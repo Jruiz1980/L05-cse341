@@ -1,4 +1,5 @@
 import express = require('express');
+import session from 'express-session';
 import bodyParser = require('body-parser');
 import * as mongodb from './db/connect';
 import routes from './routes';
@@ -6,6 +7,7 @@ import morgan = require('morgan');
 import { loginRouter } from './routes/oauth';
 import "./middleware/oauth";
 import * as passport from 'passport';
+import './models/collections';
 
 const port: string | number = process.env.PORT || 8080;
 const app = express();
@@ -20,7 +22,15 @@ app
   })
   .use('/', routes);
 
+app.use(session({
+  secret: 'secret', // Cambia esto por una clave secreta real en tu entorno de producción
+  resave: false,
+  saveUninitialized: true,
+}));
+
 app.use(passport.initialize());
+app.use(passport.session());
+
 app.use(
   "/auth",
   passport.authenticate("auth-google", {
