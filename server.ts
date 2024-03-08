@@ -9,6 +9,7 @@ import "./middleware/oauth";
 import * as passport from 'passport';
 import './models/collections';
 import MongoStore = require('connect-mongo');
+require('dotenv').config();
 
 
 const port: string | number = process.env.PORT || 8080;
@@ -33,7 +34,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
+    mongoUrl: process.env.MONGODB_URI,
     //autoRemove: 'native'
   })
 }));
