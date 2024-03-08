@@ -22,7 +22,7 @@ if (!process.env.MONGODB_URI) {
   throw new Error('La variable de entorno MONGODB_URI no está definida.');
 }
 mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('Conexión exitosa a MongoDB'))
+  .then(() => console.log('MongoDB connection successfully'))
   .catch(err => console.error('No se pudo conectar a MongoDB:', err));
 
 // Definición del esquema y modelo de usuario

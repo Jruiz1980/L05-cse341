@@ -16,7 +16,7 @@ const port: string | number = process.env.PORT || 8080;
 const app = express();
 const mongoDBUri = process.env.MONGODB_URI;
 if (!mongoDBUri) {
-  throw new Error('La variable de entorno MONGODB_URI no está definida.');
+  throw new Error('MONGODB_URI entry is not defined.');
 }
 
 app.use(morgan('dev'));
@@ -30,12 +30,11 @@ app
   .use('/', routes);
 
 app.use(session({
-  secret: process.env.SESSION_SECRET, // Cambia esto por una clave secreta real en tu entorno de producción
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
     mongoUrl: process.env.MONGODB_URI,
-    //autoRemove: 'native'
   })
 }));
 
