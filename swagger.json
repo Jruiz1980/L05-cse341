@@ -177,8 +177,8 @@
       "get": {
         "description": "",
         "responses": {
-          "default": {
-            "description": ""
+          "403": {
+            "description": "Forbidden"
           }
         }
       }
