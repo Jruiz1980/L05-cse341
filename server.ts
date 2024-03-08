@@ -25,12 +25,12 @@ app
   .use('/', routes);
 
 app.use(session({
-  secret: 'secret', // Cambia esto por una clave secreta real en tu entorno de producción
+  secret: 'a723b657a36ff8a7d3773fb2ddaefb26bee91889448d520ba8f99150d77e577a', // Cambia esto por una clave secreta real en tu entorno de producción
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URI,
-    autoRemove: 'native'
+    //autoRemove: 'native'
   })
 }));
 
