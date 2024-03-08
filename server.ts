@@ -13,6 +13,10 @@ import MongoStore = require('connect-mongo');
 
 const port: string | number = process.env.PORT || 8080;
 const app = express();
+const mongoDBUri = process.env.MONGODB_URI;
+if (!mongoDBUri) {
+  throw new Error('La variable de entorno MONGODB_URI no está definida.');
+}
 
 app.use(morgan('dev'));
 
@@ -25,7 +29,7 @@ app
   .use('/', routes);
 
 app.use(session({
-  secret: 'a723b657a36ff8a7d3773fb2ddaefb26bee91889448d520ba8f99150d77e577a', // Cambia esto por una clave secreta real en tu entorno de producción
+  secret: process.env.SESSION_SECRET, // Cambia esto por una clave secreta real en tu entorno de producción
   resave: false,
   saveUninitialized: true,
   store: MongoStore.create({
