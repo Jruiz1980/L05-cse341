@@ -8,7 +8,7 @@ import { loginRouter } from './routes/oauth';
 import "./middleware/oauth";
 import * as passport from 'passport';
 import './models/collections';
-import MongoStore from 'connect-mongo';
+import MongoStore = require('connect-mongo');
 
 
 const port: string | number = process.env.PORT || 8080;
