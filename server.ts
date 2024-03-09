@@ -6,7 +6,7 @@ import routes from './routes';
 import morgan = require('morgan');
 import { loginRouter } from './routes/oauth';
 import "./middleware/oauth";
-import * as passport from 'passport';
+import passport = require('passport');
 import './models/collections';
 import MongoStore = require('connect-mongo');
 require('dotenv').config();
