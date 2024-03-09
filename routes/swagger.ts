@@ -6,7 +6,7 @@ import { verifyAuth } from '../middleware/oauth';
 
 const router: express.Router = express.Router();
 
-router.use('/api-docs', verifyAuth, swaggerUi.serve);
+router.use('/api-docs',  swaggerUi.serve);
 router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 export default router;
