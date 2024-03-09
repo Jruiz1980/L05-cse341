@@ -34,7 +34,12 @@ passport.use(
 export const verifyAuth = (req: CustomRequest, res: Response, next: NextFunction) => {
    if (req.path.startsWith('/api-docs')) {
     return next();
-  } /*else {
-    res.status(403).send('You are not authorised to modify');
-  }*/
+  } 
+   if (req.isAuthenticated() && req.user?.email && emails.includes(req.user.email)) {
+    next();
+  } else {
+    res.status(403).send('You are not authorized to view this resource');
+  }
 };
+
+console.log(verifyAuth);
