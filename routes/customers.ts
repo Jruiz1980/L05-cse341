@@ -6,6 +6,7 @@ import {
   updateCustomer,
   deleteCustomer
 } from '../controllers/customers';
+import { verifyAuth } from '../middleware/oauth';
 
 import { validations, handleValidationErrors } from '../middleware/validate';
 
@@ -14,9 +15,9 @@ const router: express.Router = express.Router();
 
 router.get('/', getAll);
 router.get('/:id', getSingle);
-router.post('/', validations, handleValidationErrors, createCustomer);
-router.put('/:id', validations, handleValidationErrors, updateCustomer);
-router.delete('/:id', deleteCustomer);
+router.post('/', verifyAuth, validations, handleValidationErrors, createCustomer);
+router.put('/:id', verifyAuth, validations, handleValidationErrors, updateCustomer);
+router.delete('/:id', verifyAuth, deleteCustomer);
 
 
 export default router;
