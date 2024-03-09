@@ -1,5 +1,4 @@
 // collections.ts
-
 import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import * as passport from 'passport';
@@ -14,8 +13,6 @@ export interface IUser extends Document {
   email: string;
   googleId: string;
 }
-
-
 
 // Conexión a MongoDB
 if (!process.env.MONGODB_URI) {
