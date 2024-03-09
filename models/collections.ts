@@ -1,5 +1,5 @@
 // collections.ts
-import mongoose from 'mongoose';
+import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
 import * as passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
