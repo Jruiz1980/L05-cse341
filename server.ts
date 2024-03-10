@@ -1,15 +1,15 @@
-import express from 'express';
-import session from 'express-session';
+const session = require('express-session');
 import mongoose from 'mongoose';
 import * as mongodb from './db/connect';
-import passport from 'passport';
-import cors from 'cors';
+const passport = require('passport');
+const cors = require('cors');
 import helmet from 'helmet';
 const rateLimit = require('express-rate-limit');
-import morgan from 'morgan';
+const morgan = require('morgan');
 const MongoStore = require('connect-mongo');
-import dotenv from 'dotenv';
-import bodyParser from 'body-parser';
+const dotenv = require('dotenv');
+const bodyParser = require('body-parser');
+import express, { Request, Response, NextFunction } from 'express';
 import routes from './routes';
 
 dotenv.config();
@@ -25,7 +25,7 @@ app.use(morgan('dev'));
 
 app
   .use(bodyParser.json())
-  .use((req: express.Request, res: express.Response, next: express.NextFunction) => {
+  .use((req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
@@ -63,12 +63,12 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
+  (req: any, res: { redirect: (arg0: string) => void; }) => {
     // Successful authentication, redirect home.
     res.redirect('/');
   });
 
-app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+app.use((err: any, req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
   console.error('Error message: ', err.message);
   console.error('Stack trace: ', err.stack);
   res.status(500).send('Something broke!');

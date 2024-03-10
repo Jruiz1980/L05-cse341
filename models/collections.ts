@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
-import passport from 'passport';
+const dotenv = require('dotenv');
+const passport = require('passport');
 import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
 
 dotenv.config();
@@ -63,11 +63,11 @@ passport.use(new GoogleStrategy({
 ));
 
 // User Serialization and Deserialization for Passport Session
-passport.serializeUser((user: any, done) => {
+passport.serializeUser((user: any, done: (arg0: null, arg1: any) => void) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser((id: any, done: (arg0: any, arg1: boolean | Express.User) => void) => {
   User.findById(id, (err: any, user: boolean | Express.User) => {
     done(err, user);
   });

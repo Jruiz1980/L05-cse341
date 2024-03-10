@@ -1,10 +1,8 @@
 // oauth.ts
-
-import express from 'express';
-import passport from 'passport';
+const passport = require('passport');
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import mongoose from 'mongoose';
-import dotenv from 'dotenv';
+const dotenv = require('dotenv');
 import { Request, Response, NextFunction } from 'express';
 import { User, Seller } from '../models/collections'; // Adjust the path as needed
 
@@ -77,47 +75,12 @@ export const verifySeller = (req: Request, res: Response, next: NextFunction) =>
 };
 
 // User serialization and deserialization for Passport session
-passport.serializeUser((user: any, done) => {
+passport.serializeUser((user: any, done: (arg0: null, arg1: any) => void) => {
   done(null, user.id);
 });
 
-passport.deserializeUser((id, done) => {
+passport.deserializeUser((id: any, done: (arg0: any, arg1: boolean | Express.User) => void) => {
   User.findById(id, (err: any, user: boolean | Express.User) => {
     done(err, user);
   });
-});
-
-
-
-
-// Express configuration and routes (basic example)
-const app = express();
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-// Google Auth Routes
-app.get('/auth/google',
-  passport.authenticate('google', { scope: ['profile', 'email'] }));
-
-app.get('/auth/google/callback', 
-  passport.authenticate('google', { failureRedirect: '/login' }),
-  (req, res) => {
-    // Successful authentication, redirect home.
-    res.redirect('/');
-  });
-
-// Protected route, accessible only by authenticated users
-app.get('/protected', verifyAuth, (req, res) => {
-  res.send('Access granted to the protected route');
-});
-
-// Protected route, accessible only by sellers
-app.post('/seller-only', verifyAuth, verifySeller, (req, res) => {
-  res.send('Access granted to the sellers-only route');
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
 });
