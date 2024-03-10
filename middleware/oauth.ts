@@ -7,6 +7,22 @@ import { User } from '../models/collections'; // Importing the model
 
 dotenv.config();
 
+const SellerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  googleId: { type: String, required: true },
+  role: { type: String, required: true, default: "seller" },
+});
+
+const CustomerSchema = new mongoose.Schema({
+  name: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+});
+
+const Seller = mongoose.model('Seller', SellerSchema);
+const Customer = mongoose.model('Customer', CustomerSchema);
+
+
 // Connection using a promise
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
@@ -28,28 +44,35 @@ passport.use(
       callbackURL: "https://project01-whrs.onrender.com/api-docs",
     },
     async (accessToken, refreshToken, profile, done) => {
-      const userEmail = profile.emails?.[0].value; // Handle potential empty array
+  const userEmail = profile.emails?.[0].value; // Handle potential empty array
+  let roles = ["customer"]; // Default role: customer
 
-      try {
-        // Using the imported User model
-        let user = await User.findOne({ googleId: profile.id });
+  // Logic to determine roles based on profile data (replace with your logic)
+  if (profile.hasOwnProperty('someField')) { // Check for a specific field indicating seller role
+    roles = ["seller"];
+  }
 
-        if (!user) {
-          user = new User({
-            name: profile.displayName,
-            email: userEmail,
-            googleId: profile.id,
-          });
-          await user.save();
-        }
+  try {
+    // Using the imported Seller model
+    let seller = await Seller.findOne({ googleId: profile.id });
 
-        done(null, user); // Pass the user object instead of profile
-      } catch (error) {
-        done(error, undefined);
-      }
+    if (!seller) {
+      seller = new Seller({
+        name: profile.displayName,
+        email: userEmail,
+        googleId: profile.id,
+        role: roles[0], // Set role based on logic
+      });
+      await seller.save();
     }
+
+    done(null, { ...profile, roles }); // Pass profile with roles
+  } catch (error) {
+    done(error, undefined);
+  }
+}
   )
-);
+)
 
 // ... (rest of the verifyAuth middleware remains unchanged)
 
