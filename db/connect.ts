@@ -1,31 +1,16 @@
-import dotenv = require('dotenv');
-import { MongoClient, Db } from 'mongodb';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 
 dotenv.config();
 
-let _db: Db | undefined;
-
-const initDb = (callback: (error: Error | null, db?: Db) => void): void => {
-  if (_db) {
-    console.log('Db is already initialized!');
-    return callback(null, _db);
+const connectToDatabase = async (): Promise<void> => {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI as string);
+    console.log('Success connection MongoDB with Mongoose');
+  } catch (error) {
+    console.error('Error connecting to MongoDB:', error);
+    process.exit(1); // Terminar el proceso con un error
   }
-
-  MongoClient.connect(process.env.MONGODB_URI as string)
-    .then((client) => {
-      _db = client.db(); // Assign the database from the client
-      callback(null, _db);
-    })
-    .catch((err) => {
-      callback(err);
-    });
 };
 
-const getDb = (): Db => {
-  if (!_db) {
-    throw new Error('Db not initialized');
-  }
-  return _db;
-};
-
-export { initDb, getDb };
+export { connectToDatabase };

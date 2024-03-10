@@ -1,6 +1,6 @@
 const session = require('express-session');
 const mongoose = require('mongoose');
-import * as mongodb from './db/connect';
+import { connectToDatabase} from './db/connect';
 const passport = require('passport');
 const cors = require('cors');
 import helmet from 'helmet';
@@ -80,11 +80,15 @@ process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
 });
 
 
-mongodb.initDb((err: any) => {
-  if (err) {
-    console.log(err);
-  } else {
-    app.listen(port);
-    console.log(`Connected to DB and listening on ${port}`);
+const startServer = async () => {
+  try {
+    await connectToDatabase(); // Intenta conectar a la base de datos
+    app.listen(port, () => { // Si la conexión es exitosa, inicia el servidor
+      console.log(`Server running in the port ${port}`);
+    });
+  } catch (error) {
+    console.error("The server could not be started due to a database connection error:", error);
   }
-});
+};
+
+startServer();
