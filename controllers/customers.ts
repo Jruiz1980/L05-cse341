@@ -1,12 +1,10 @@
-import { Request, Response} from 'express';
+import { Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
-import { ObjectId } from 'mongodb';
-import { getDb } from '../db/connect';
-const mongodb = { getDb };
+import Customer from '../models/customer'; // Ajusta la ruta según sea necesario
 
 const getAll = async (req: Request, res: Response): Promise<void> => {
   try {
-    const result = await mongodb.getDb().collection('customers').find().toArray();
+    const result = await Customer.find({});
     res.setHeader('Content-Type', 'application/json');
     res.status(200).json(result);
   } catch (err) {
@@ -15,15 +13,14 @@ const getAll = async (req: Request, res: Response): Promise<void> => {
 };
 
 const getSingle = async (req: Request, res: Response): Promise<void> => {
-  if (!ObjectId.isValid(req.params.id)) {
-    res.status(400).json('Must use a valid contact id to find a contact.');
-  }
-  const integer = req.params.id;
-  const userId = new ObjectId(integer);
   try {
-    const result = await mongodb.getDb().collection('customers').find({ _id: userId }).toArray();
-    res.setHeader('Content-Type', 'application/json');
-    res.status(200).json(result[0]);
+    const result = await Customer.findById(req.params.id);
+    if (result) {
+      res.setHeader('Content-Type', 'application/json');
+      res.status(200).json(result);
+    } else {
+      res.status(404).json({ message: 'Customer not found' });
+    }
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
@@ -31,10 +28,10 @@ const getSingle = async (req: Request, res: Response): Promise<void> => {
 
 const createCustomer = [
   body('firstName').notEmpty().withMessage('The first name field is required.'),
-  body('lastName').notEmpty().withMessage('The last name field is required.'),
-  body('email').isEmail().withMessage('The email field must be a valid email.'),
-  body('address').optional().isString(),
-  body('storeName').notEmpty().withMessage('The store name field is required.'),
+  body('lastName').notEmpty().withMessage('The last name field is required.'), 
+  body('email').isEmail().withMessage('The email field must be a valid email.'), 
+  body('address').optional().isString(), 
+  body('storeName').notEmpty().withMessage('The store name field is required.'), 
   async (req: Request, res: Response): Promise<void> => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -45,36 +42,26 @@ const createCustomer = [
       });
       return;
     }
-    const customer = {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      email: req.body.email,
-      address: req.body.address,
-      storeName: req.body.storeName
-    };
     try {
-      const response = await mongodb.getDb().collection('customers').insertOne(customer);
-      if (response.acknowledged) {
-        res.status(201).json(response);
-      }
+      const customer = new Customer(req.body);
+      const response = await customer.save();
+      res.status(201).json(response);
     } catch (err) {
-      res.status(500).json(err.message || 'Some error occurred while creating the contact.');
+      res.status(500).json(err.message || 'Some error occurred while creating the customer.');
     }
   }
 ];
 
 const updateCustomer = [
+  // Validaciones
   body('firstName').notEmpty().withMessage('The first name field is required.'),
   body('lastName').notEmpty().withMessage('The last name field is required.'),
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
+  // Controlador
   async (req: Request, res: Response): Promise<void> => {
-    const userId = req.params.id;
-    if (!ObjectId.isValid(userId)) {
-      res.status(400).json({ message: 'Must use a valid contact id to update a contact.' });
-      return;
-    }
+    // Verificar errores de validación
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       res.status(412).send({
@@ -84,50 +71,60 @@ const updateCustomer = [
       });
       return;
     }
-    const customer: any = {};
-    if (req.body.firstName) customer.firstName = req.body.firstName;
-    if (req.body.lastName) customer.lastName = req.body.lastName;
-    if (req.body.email) customer.email = req.body.email;
-    if (req.body.address) customer.address = req.body.address;
-    if (req.body.storeName) customer.storeName = req.body.storeName;
+
+    const customerId = req.params.id;
+    const updateData = {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      email: req.body.email,
+      address: req.body.address,
+      storeName: req.body.storeName,
+    };
+
     try {
-      const response = await mongodb
-        .getDb()
-        .collection('customers')
-        .updateOne({ _id: new ObjectId(userId) }, { $set: customer });
-      if (response.modifiedCount > 0) {
-        res.status(204).send();
+      // Actualizar el cliente
+      const updatedCustomer = await Customer.findByIdAndUpdate(customerId, updateData, {
+        new: true, // Esto retorna el documento modificado en lugar del original
+        runValidators: true, // Ejecutar validaciones definidas en el esquema de Mongoose
+      });
+
+      if (updatedCustomer) {
+        res.status(200).json(updatedCustomer);
       } else {
-        res.status(500).json({ message: 'Error: No contact was updated.', details: response });
+        res.status(404).json({ message: 'Customer not found' });
       }
     } catch (error) {
-      console.log(error);
+      console.error('Error updating customer:', error);
       res.status(500).json({
-        message: 'Some error occurred while updating the contact.',
-        error: error.toString()
+        message: 'Error updating customer',
+        error: error.message,
       });
     }
   }
 ];
 
+
 const deleteCustomer = async (req: Request, res: Response): Promise<void> => {
-  try {
-    if (!ObjectId.isValid(req.params.id)) {
-      res.status(400).json('Must use a valid contact id to delete a contact.');
-      return;
+    const customerId = req.params.id; // Obtiene el ID del cliente desde el parámetro de la ruta
+
+    try {
+        const deletedCustomer = await Customer.findByIdAndDelete(customerId);
+
+        if (deletedCustomer) {
+            res.status(200).json({ message: 'Customer successfully deleted', deletedCustomer });
+        } else {
+            // Si no se encuentra el cliente con el ID proporcionado, responde con un error 404
+            res.status(404).json({ message: 'Customer not found' });
+        }
+    } catch (error) {
+        console.error('Error deleting customer:', error);
+        // En caso de error en la operación de la base de datos, responde con un error 500
+        res.status(500).json({
+            message: 'Error deleting customer',
+            error: error.message,
+        });
     }
-    const integer = req.params.id;
-    const userId = new ObjectId(integer);
-    const response = await mongodb.getDb().collection('customers').deleteOne({ _id: userId });
-    console.log(response);
-    if (response.deletedCount > 0) {
-      res.status(204).send();
-    } else {
-      res.status(404).json('No contact found to delete.');
-    }
-  } catch (err) {
-    res.status(500).json(err.message || 'Some error occurred while deleting the contact.');
-  }
 };
+
 
 export { getAll, getSingle, createCustomer, updateCustomer, deleteCustomer };
