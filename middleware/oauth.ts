@@ -1,22 +1,19 @@
 import { Request, Response, NextFunction } from 'express';
 import * as passport from 'passport';
-import {Strategy as GoogleStrategy} from 'passport-google-oauth20';
+import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import * as mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
+import { User } from '../models/collections'; // Importing the model
+
 dotenv.config();
 
-const mongoURI = process.env.MONGODB_URI; // Assumes a MongoDB connection URI stored in an environment variable
-
-mongoose.connect(mongoURI)
+// Connection using a promise
+mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error(err));
+  .catch(err => console.error('MongoDB connection error:', err));
 
-const userSchema = new mongoose.Schema({
-  seller: {type: String, required: true, unique: true},
-  email: { type: String, required: true, unique: true }
-}, { collection: 'sellers' }); // Specify the collection name
-
-const User = mongoose.model('User', userSchema);
+// Removed user model definition (now imported)
+// const userSchema = new mongoose.Schema(...);
 
 interface CustomRequest extends Request {
   user?: { email: string };
@@ -30,23 +27,31 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: "https://project01-whrs.onrender.com/api-docs",
     },
-    function(accessToken, refreshToken, profile, done) {
-  const userEmail = profile.emails[0].value;
+    async (accessToken, refreshToken, profile, done) => {
+      const userEmail = profile.emails?.[0].value; // Handle potential empty array
 
-  // Check if the user's email is authorized (replace with your actual logic)
-  mongoose.connection.db.collection('sellers').findOne({ email: userEmail })
-    .then(user => {
-      if (user) { // User found in the authorized list
-        done(null, profile);
-      } else {
-        done(null, false); // Reject unauthorized users
+      try {
+        // Using the imported User model
+        let user = await User.findOne({ googleId: profile.id });
+
+        if (!user) {
+          user = new User({
+            name: profile.displayName,
+            email: userEmail,
+            googleId: profile.id,
+          });
+          await user.save();
+        }
+
+        done(null, user); // Pass the user object instead of profile
+      } catch (error) {
+        done(error, undefined);
       }
-    })
-    .catch(err => done(err, undefined)); // Handle errors during database lookup
-}
-
+    }
   )
-)
+);
+
+// ... (rest of the verifyAuth middleware remains unchanged)
 
 export const verifyAuth = (req: CustomRequest, res: Response, next: NextFunction) => {
   if (req.path.startsWith('/api-docs')) {
