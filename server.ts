@@ -1,23 +1,25 @@
-import express = require('express');
-import session = require('express-session');
-import bodyParser = require('body-parser');
+import express from 'express';
+import session from 'express-session';
+import mongoose from 'mongoose';
 import * as mongodb from './db/connect';
+import passport from 'passport';
+import cors from 'cors';
+import helmet from 'helmet';
+const rateLimit = require('express-rate-limit');
+import morgan from 'morgan';
+const MongoStore = require('connect-mongo');
+import dotenv from 'dotenv';
+import bodyParser from 'body-parser';
 import routes from './routes';
-import morgan = require('morgan');
-import { loginRouter } from './routes/oauth';
-import "./middleware/oauth";
-import passport = require('passport');
-import './models/collections';
-import MongoStore = require('connect-mongo');
-require('dotenv').config();
 
-
-const port: string | number = process.env.PORT || 8080;
+dotenv.config();
 const app = express();
-const mongoDBUri = process.env.MONGODB_URI;
-if (!mongoDBUri) {
-  throw new Error('MONGODB_URI entry is not defined.');
-}
+const port = process.env.PORT
+
+
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Conexión exitosa a MongoDB'))
+  .catch(err => console.error('No se pudo conectar a MongoDB:', err));
 
 app.use(morgan('dev'));
 
@@ -41,17 +43,31 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(
-  "/auth",
-  passport.authenticate("auth-google", {
-    scope: [
-      "https://www.googleapis.com/auth/userinfo.profile",
-      "https://www.googleapis.com/auth/userinfo.email",
-    ],
-    session: false,
-  }),
-  loginRouter
-);
+// Middlewares
+app.use(morgan('dev')); // Logging
+app.use(helmet()); // Seguridad básica
+app.use(cors()); // Configuración de CORS
+app.use(express.json()); // Parseo de JSON
+app.use(express.urlencoded({ extended: true }));
+
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutos
+  max: 100, // Limita cada IP a 100 solicitudes por ventana (aquí, por 15 minutos)
+});
+app.use(limiter);
+
+
+// Google Auth Routes
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error('Error message: ', err.message);
   console.error('Stack trace: ', err.stack);

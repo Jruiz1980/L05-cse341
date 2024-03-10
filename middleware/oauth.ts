@@ -1,104 +1,123 @@
-import { Request, Response, NextFunction } from 'express';
-import * as passport from 'passport';
+// oauth.ts
+
+import express from 'express';
+import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import * as mongoose from 'mongoose';
-import * as dotenv from 'dotenv';
-import { User } from '../models/collections'; // Importing the model
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import { Request, Response, NextFunction } from 'express';
+import { User, Seller } from '../models/collections'; // Adjust the path as needed
 
 dotenv.config();
 
-const SellerSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-  googleId: { type: String, required: true },
-  role: { type: String, required: true, default: "seller" },
-});
-
-const CustomerSchema = new mongoose.Schema({
-  name: { type: String, required: true },
-  email: { type: String, required: true, unique: true },
-});
-
-const Seller = mongoose.model('Seller', SellerSchema);
-const Customer = mongoose.model('Customer', CustomerSchema);
-
-
-// Connection using a promise
-mongoose.connect(process.env.MONGODB_URI)
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI!)
   .then(() => console.log('Connected to MongoDB'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Removed user model definition (now imported)
-// const userSchema = new mongoose.Schema(...);
-
-interface CustomRequest extends Request {
-  user?: { email: string };
-}
-
+// Google OAuth Strategy Configuration with Passport
 passport.use(
-  "auth-google",
   new GoogleStrategy(
     {
-      clientID: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-      callbackURL: "https://project01-whrs.onrender.com/api-docs",
+      clientID: process.env.GOOGLE_CLIENT_ID as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      callbackURL: "https://project01-whrs.onrender.com/auth/google/callback",
     },
     async (accessToken, refreshToken, profile, done) => {
-  const userEmail = profile.emails?.[0].value; // Handle potential empty array
-  let roles = ["customer"]; // Default role: customer
-
-  // Logic to determine roles based on profile data (replace with your logic)
-  if (profile.hasOwnProperty('someField')) { // Check for a specific field indicating seller role
-    roles = ["seller"];
-  }
-
-  try {
-    // Using the imported Seller model
-    let seller = await Seller.findOne({ googleId: profile.id });
-
-    if (!seller) {
-      seller = new Seller({
-        name: profile.displayName,
-        email: userEmail,
-        googleId: profile.id,
-        role: roles[0], // Set role based on logic
-      });
-      await seller.save();
+      const userEmail = profile.emails?.[0]?.value;
+      if (!userEmail) {
+        return done(new Error("An email was not found in the Google profile"), undefined);
+      }
+      try {
+        let user = await User.findOne({ googleId: profile.id });
+        if (!user) {
+          // If the user does not exist, create a new one with Google data
+          user = new User({
+            name: profile.displayName,
+            email: userEmail,
+            googleId: profile.id,
+          });
+          await user.save(); // Save the new user to the database
+        }
+        done(undefined, user);
+      } catch (error) {
+        done(error, undefined);
+      }
     }
-
-    done(null, { ...profile, roles }); // Pass profile with roles
-  } catch (error) {
-    done(error, undefined);
-  }
-}
   )
-)
+);
 
-// ... (rest of the verifyAuth middleware remains unchanged)
-
-export const verifyAuth = (req: CustomRequest, res: Response, next: NextFunction) => {
-  if (req.path.startsWith('/api-docs')) {
+// Middleware to verify if the user is authenticated
+export const verifyAuth = (req: Request, res: Response, next: NextFunction) => {
+  if (req.isAuthenticated()) {
     return next();
   }
-
-  // Check if the user is authenticated and has a valid email in the request object
-  if (req.isAuthenticated() && req.user?.email) {
-    const userEmail = req.user.email;
-
-    // Database lookup to verify authorization
-    mongoose.connection.db.collection('sellers').findOne({ email: userEmail })
-      .then(user => {
-        if (user) { // User found in the authorized list (sellers collection)
-          next();
-        } else {
-          res.status(403).send('You are not authorized to view this resource');
-        }
-      })
-      .catch(err => {
-        console.error('Error during authorization check:', err);
-        res.status(500).send('Internal Server Error'); // Handle database errors gracefully
-      });
-  } else {
-    res.status(401).send('Unauthorized'); // User not authenticated
-  }
+  res.status(401).send('Unauthorized');
 };
+
+// Middleware to verify if the user is a seller
+export const verifySeller = (req: Request, res: Response, next: NextFunction) => {
+  if (!req.isAuthenticated() || !req.user) {
+    return res.status(401).send('Unauthorized');
+  }
+
+  const userEmail = (req.user as any).email;
+
+  Seller.findOne({ email: userEmail }, (err: any, seller: any) => {
+    if (err) {
+      console.error('Error during seller authorization check:', err);
+      return res.status(500).send('Internal Server Error');
+    }
+    if (seller) {
+      next();
+    } else {
+      res.status(403).send('You are not authorized to perform this action');
+    }
+  });
+};
+
+// User serialization and deserialization for Passport session
+passport.serializeUser((user: any, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser((id, done) => {
+  User.findById(id, (err: any, user: boolean | Express.User) => {
+    done(err, user);
+  });
+});
+
+
+
+
+// Express configuration and routes (basic example)
+const app = express();
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Google Auth Routes
+app.get('/auth/google',
+  passport.authenticate('google', { scope: ['profile', 'email'] }));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  });
+
+// Protected route, accessible only by authenticated users
+app.get('/protected', verifyAuth, (req, res) => {
+  res.send('Access granted to the protected route');
+});
+
+// Protected route, accessible only by sellers
+app.post('/seller-only', verifyAuth, verifySeller, (req, res) => {
+  res.send('Access granted to the sellers-only route');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});

@@ -1,71 +1,76 @@
-// collections.ts
-import * as mongoose from 'mongoose';
+import mongoose from 'mongoose';
 import * as dotenv from 'dotenv';
-import * as passport from 'passport';
-import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
-import { Profile } from 'passport-google-oauth20';
-import { Document } from 'mongoose';
+import passport from 'passport';
+import { Strategy as GoogleStrategy, Profile } from 'passport-google-oauth20';
+
 dotenv.config();
 
-// Definición de un esquema de usuario
-export interface IUser extends Document {
-  name: string;
-  email: string;
-  googleId: string;
-}
-
-// Conexión a MongoDB
+// MongoDB Connection
 if (!process.env.MONGODB_URI) {
-  throw new Error('La variable de entorno MONGODB_URI no está definida.');
+  throw new Error('The MONGODB_URI environment variable is not defined.');
 }
-mongoose.connect(process.env.MONGODB_URI)
-  .then(() => console.log('MongoDB connection successfully'))
-  .catch(err => console.error('No se pudo conectar a MongoDB:', err));
 
-// Definición del esquema y modelo de usuario
+mongoose.connect(process.env.MONGODB_URI)
+  .then(() => console.log('Successful connection to MongoDB'))
+  .catch(err => console.error('Could not connect to MongoDB:', err));
+
+// User Schema and Model Definition
 const userSchema = new mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true },
-  googleId: { type: String, required: true }, // Campo para almacenar el ID de Google
+  googleId: { type: String, required: true },
+  role: { type: String, required: true, default: 'client' }, // 'role' field to distinguish between sellers and clients
 });
 
-const User = mongoose.model<IUser>('User', userSchema);
+const User = mongoose.model('User', userSchema);
 
-// Configuración de la estrategia de autenticación de Google con Passport
+// Seller Schema and Model Definition
+const sellerSchema = new mongoose.Schema({
+  userId: { type: String, required: true }, // Assuming this is the googleId of the user
+  // Add any other fields relevant to a seller
+});
+
+const Seller = mongoose.model('Seller', sellerSchema);
+
+// Google Authentication Strategy Configuration with Passport
 passport.use(new GoogleStrategy({
     clientID: process.env.GOOGLE_CLIENT_ID as string,
     clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
-    callbackURL: "https://project01-whrs.onrender.com/api-docs"
+    callbackURL: "https://project01-whrs.onrender.com/auth/google/callback"
   },
   async (accessToken, refreshToken, profile: Profile, cb) => {
     try {
-      // Buscar el usuario en la base de datos por su Google ID
       let user = await User.findOne({ googleId: profile.id });
       if (!user) {
-        // Si el usuario no existe, crear uno nuevo con los datos de Google
+        // If the user does not exist, create a new one
         user = new User({
           name: profile.displayName,
-          email: profile.emails?.[0].value, // Ten en cuenta que profile.emails es un array y puede estar vacío
+          email: profile.emails?.[0].value,
           googleId: profile.id,
         });
-        await user.save(); // Guardar el nuevo usuario en la base de datos
       }
-      return cb(undefined, user); // Continuar con el usuario encontrado o creado, usando `undefined` en lugar de `null`
+
+      // Check if the user is a seller
+      const isSeller = await Seller.findOne({ userId: profile.id });
+      user.role = isSeller ? 'seller' : 'client'; // Update the user's role
+
+      await user.save();
+      return cb(undefined, user);
     } catch (error) {
-      return cb(error, undefined); // En caso de error, pasar `undefined` como segundo argumento
+      return cb(error, undefined);
     }
   }
 ));
 
-// Serialización y deserialización de usuarios para la sesión de Passport
+// User Serialization and Deserialization for Passport Session
 passport.serializeUser((user: any, done) => {
   done(null, user.id);
 });
 
 passport.deserializeUser((id, done) => {
-  User.findById(id, (err: any, user: IUser) => {
-    done(err, user as IUser);
+  User.findById(id, (err: any, user: boolean | Express.User) => {
+    done(err, user);
   });
 });
 
-export { User }; // Exportar el modelo de usuario para su uso en otras partes de la aplicación
+export { User, Seller }; // Export the models for use in other parts of the application
