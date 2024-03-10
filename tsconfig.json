@@ -8,10 +8,11 @@
     "noImplicitAny": true,
     "moduleResolution": "node",
     "module": "CommonJS",
-    "target": "ES2017",
+    "target": "es6",
     "jsx": "react",
     "allowJs": true,
-    "declaration": true
+    "declaration": true,
+    "strict": true
   },
   "include": ["*", "controllers/*", "db/*", "middleware/*", "routes/*", "models/*"]
 }
