@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction } from 'express';
+import { Request, Response} from 'express';
 import { body, validationResult } from 'express-validator';
 import { ObjectId } from 'mongodb';
 import { getDb } from '../db/connect';
@@ -125,8 +125,8 @@ const deleteCustomer = async (req: Request, res: Response): Promise<void> => {
     } else {
       res.status(404).json('No contact found to delete.');
     }
-  } catch (error) {
-    res.status(500).json(error.message || 'Some error occurred while deleting the contact.');
+  } catch (err) {
+    res.status(500).json(err.message || 'Some error occurred while deleting the contact.');
   }
 };
 

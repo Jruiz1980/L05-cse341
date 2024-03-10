@@ -1,5 +1,5 @@
 const session = require('express-session');
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 import * as mongodb from './db/connect';
 const passport = require('passport');
 const cors = require('cors');
@@ -9,7 +9,8 @@ const morgan = require('morgan');
 const MongoStore = require('connect-mongo');
 const dotenv = require('dotenv');
 const bodyParser = require('body-parser');
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response, NextFunction } from 'express';
+const express = require('express');
 import routes from './routes';
 
 dotenv.config();
@@ -19,13 +20,13 @@ const port = process.env.PORT
 
 mongoose.connect(process.env.MONGODB_URI)
   .then(() => console.log('Conexión exitosa a MongoDB'))
-  .catch(err => console.error('No se pudo conectar a MongoDB:', err));
+  .catch((err: any) => console.error('No se pudo conectar a MongoDB:', err));
 
 app.use(morgan('dev'));
 
 app
   .use(bodyParser.json())
-  .use((req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
+  .use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     next();
   })
@@ -63,15 +64,15 @@ app.get('/auth/google',
 
 app.get('/auth/google/callback', 
   passport.authenticate('google', { failureRedirect: '/login' }),
-  (req: any, res: { redirect: (arg0: string) => void; }) => {
+  (req: Request, res: { redirect: (arg0: string) => void; }) => {
     // Successful authentication, redirect home.
     res.redirect('/');
   });
 
-app.use((err: any, req: Express.Request, res: Express.Response, next: Express.NextFunction) => {
+app.use((err: any, res: any) => {
   console.error('Error message: ', err.message);
   console.error('Stack trace: ', err.stack);
-  res.status(500).send('Something broke!');
+  res.Status(500).send('Something broke!');
 });
 
 process.on('unhandledRejection', (reason: any, promise: Promise<any>) => {
