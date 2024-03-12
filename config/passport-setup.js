@@ -13,6 +13,7 @@ passport.use(
       callbackURL: 'https://project01-whrs.onrender.com/api-docs'
     },
     function (accessToken, refreshToken, profile, done) {
+      console.log(profile);
       User.findOne({ googleId: profile.id }, async (err, existingUser) => {
         if (err) return done(err);
         if (existingUser) {

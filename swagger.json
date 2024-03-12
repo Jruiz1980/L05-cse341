@@ -10,6 +10,17 @@
   "schemes": [
     "https"
   ],
+  "securityDefinitions": {
+    "BearerAuth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://project01-whrs.onrender.com/auth/google",
+      "flow": "implicit",
+      "scopes": {
+        "read:customers": "read your customers",
+        "write:customers": "modify customers in your account"
+      }
+    }
+  },
   "paths": {
     "/customers/": {
       "get": {
@@ -20,6 +31,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -55,6 +69,12 @@
           "201": {
             "description": "Created"
           },
+          "403": {
+            "description": "Forbidden"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -78,6 +98,9 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
           }
         }
       },
@@ -119,6 +142,15 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
+          "412": {
+            "description": "Precondition Failed"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -138,6 +170,12 @@
           "204": {
             "description": "No Content"
           },
+          "400": {
+            "description": "Bad Request"
+          },
+          "403": {
+            "description": "Forbidden"
+          },
           "500": {
             "description": "Internal Server Error"
           }
@@ -154,5 +192,10 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "BearerAuth": []
+    }
+  ]
 }
