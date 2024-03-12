@@ -1,9 +1,10 @@
 const express = require('express');
-const session = require('express-session');
 const bodyParser = require('body-parser');
 const passport =  require('passport');
 require('./config/passport-setup');
 const mongodb = require('./db/connect');
+const MongoStore = require('connect-mongo')(session);
+const session = require('express-session');
 const morgan = require('morgan');
 const cors = require('cors');
 
@@ -18,7 +19,8 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: new MongoStore({ mongooseConnection: mongoose.connection })
   })
 );
 
