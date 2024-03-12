@@ -11,7 +11,7 @@ router.get('/:id', customersController.getSingle);
 
 router.post(
   '/',
-  //isAuthenticated, 
+  isAuthenticated, 
   validateSeller,
   validation.saveContact,
   customersController.createCustomer
