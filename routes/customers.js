@@ -11,18 +11,23 @@ router.get('/:id', customersController.getSingle);
 
 router.post(
   '/',
-  isAuthenticated, validateSeller,
+  //isAuthenticated, 
+  validateSeller,
   validation.saveContact,
   customersController.createCustomer
 );
 
 router.put(
   '/:id',
-  isAuthenticated, validateSeller,
+  //isAuthenticated, 
+  validateSeller,
   validation.saveContact,
   customersController.updateCustomer
 );
 
-router.delete('/:id', isAuthenticated, validateSeller, customersController.deleteCustomer);
+router.delete('/:id', 
+//isAuthenticated, 
+validateSeller, 
+customersController.deleteCustomer);
 
 module.exports = router;
