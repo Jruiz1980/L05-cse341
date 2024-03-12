@@ -7,7 +7,7 @@ const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const morgan = require('morgan');
 const cors = require('cors');
-const mongoose = require('mongoose');
+//const mongoose = require('mongoose');
 
 require('dotenv').config();
 
@@ -21,7 +21,8 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongooseConnection: mongoose.connection })
+    store: MongoStore.create({ 
+      mongoUrl: process.env.MONGODB_URI })
   })
 );
 
