@@ -11,7 +11,7 @@ const validateSeller = async (req, res, next) => {
   try {
     const seller = await mongodb.getDb().db().collection('sellers').findOne({ email: userEmail });
     if (!seller) { // Verifica si existe un registro de vendedor con ese email
-      return res.status(403).json({ message: 'Acceso denegado. El usuario no está autorizado como vendedor.' });
+      return res.status(403).json({ message: 'Denied access. Seller is not authorized' });
     }
     next();
   } catch (err) {
