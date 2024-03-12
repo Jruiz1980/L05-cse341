@@ -10,7 +10,7 @@ const doc = {
   securityDefinitions: {
     BearerAuth: {
       type: 'oauth2',
-      authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
+      authorizationUrl: 'https://project01-whrs.onrender.com/auth/google',
       flow: 'implicit',
       scopes: {
         'read:customers': 'read your customers',
@@ -18,9 +18,11 @@ const doc = {
       }
     }
   },
-  security: [{
-    BearerAuth: []
-  }]
+  security: [
+    {
+      BearerAuth: []
+    }
+  ]
 };
 
 const outputFile = './swagger.json';
