@@ -6,7 +6,21 @@ const doc = {
     description: 'Customers API'
   },
   host: 'project01-whrs.onrender.com',
-  schemes: ['https']
+  schemes: ['https'],
+  securityDefinitions: {
+    BearerAuth: {
+      type: 'oauth2',
+      authorizationUrl: 'https://accounts.google.com/o/oauth2/auth',
+      flow: 'implicit',
+      scopes: {
+        'read:customers': 'read your customers',
+        'write:customers': 'modify customers in your account'
+      }
+    }
+  },
+  security: [{
+    BearerAuth: []
+  }]
 };
 
 const outputFile = './swagger.json';
