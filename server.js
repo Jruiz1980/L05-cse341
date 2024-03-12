@@ -3,10 +3,11 @@ const bodyParser = require('body-parser');
 const passport =  require('passport');
 require('./config/passport-setup');
 const mongodb = require('./db/connect');
-const MongoStore = require('connect-mongo')(session);
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const morgan = require('morgan');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
 require('dotenv').config();
 
@@ -20,7 +21,7 @@ app.use(
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: true,
-    store: new MongoStore({ mongooseConnection: mongoose.connection })
+    store: MongoStore.create({ mongooseConnection: mongoose.connection })
   })
 );
 
