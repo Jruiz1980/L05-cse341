@@ -15,8 +15,7 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // Puedes agregar más campos según lo necesites
-  // Por ejemplo, si quieres diferenciar entre vendedores y otros tipos de usuarios:
+
   role: {
     type: String,
     enum: ['user', 'seller', 'admin'],
@@ -33,8 +32,6 @@ const userSchema = new mongoose.Schema({
   }
 });
 
-// Si quieres añadir métodos o lógica adicional a tu esquema, puedes hacerlo aquí.
-// Por ejemplo, un método para verificar si el usuario es un vendedor:
 userSchema.methods.isSeller = function () {
   return this.role === 'seller';
 };

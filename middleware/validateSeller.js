@@ -1,4 +1,5 @@
 const mongodb = require('../db/connect');
+const user = require('../routes/user');
 const { ObjectId } = require('mongodb');
 
 const validateSeller = async (req, res, next) => {
