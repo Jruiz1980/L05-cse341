@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../models/user');
+const Seller = require('../models/seller');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require('dotenv');
 const validator = require('validator'); // For email validation
@@ -13,47 +13,35 @@ passport.use(
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       callbackURL: 'https://project01-whrs.onrender.com/api-docs'
     },
-    function (accessToken, refreshToken, profile, done) {
-      // Log the user profile for debugging purposes (remove in production)
-      console.log(profile);
-
-      User.findOne({ googleId: profile.id }, async (err, existingUser) => {
-        if (err) {
-          console.error('Error finding user:', err);
-          return done(err); // Propagate the error to the application
-        }
-
-        if (existingUser) {
-          // The user already exists in the database
-          return done(null, existingUser);
-        } else {
-          // The user does not exist, create a new user
-          const newUser = new User({
+    async (accessToken, refreshToken, profile, done) => {
+      console.log(profile); // Solo para propósitos de depuración
+      try {
+        let seller = await Seller.findOne({ googleId: profile.id });
+        if (!seller) {
+          // El vendedor no existe, crea un nuevo vendedor
+          seller = new Seller({
             googleId: profile.id,
-            email: validator.isEmail(profile.emails[0].value) ? profile.emails[0].value : '', // Sanitize email
-            name: profile.displayName // You can add more fields as needed
+            email: validator.isEmail(profile.emails[0].value) ? profile.emails[0].value : '', // Sanitizar email
+            name: profile.displayName
+            // Agrega cualquier otro campo necesario
           });
-
-          try {
-            const savedUser = await newUser.save();
-            return done(null, savedUser);
-          } catch (error) {
-            console.error('Error saving user:', error);
-            return done(error); // Propagate the error to the application
-          }
+          await seller.save();
         }
-      });
+        return done(null, seller);
+      } catch (error) {
+        console.error('Error processing Google OAuth callback:', error);
+        return done(error);
+      }
     }
   )
 );
-
 // Serialize y deserialize user
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
+passport.serializeUser(function (seller, done) {
+  done(null, seller.id);
 });
 
 passport.deserializeUser(function (id, done) {
-  User.findById(id, function (err, user) {
-    done(err, user);
+  User.findById(id, function (err, seller) {
+    done(err, seller);
   });
 });
