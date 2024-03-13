@@ -13,12 +13,9 @@
   "securityDefinitions": {
     "BearerAuth": {
       "type": "oauth2",
-      "authorizationUrl": "https://project01-whrs.onrender.com/auth/google",
+      "authorizationUrl": "https://project01-whrs.onrender.com/api-docs",
       "flow": "implicit",
-      "scopes": {
-        "read:customers": "read your customers",
-        "write:customers": "modify customers in your account"
-      }
+      "scopes": {}
     }
   },
   "paths": {
@@ -68,6 +65,9 @@
         "responses": {
           "201": {
             "description": "Created"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
@@ -145,6 +145,9 @@
           "400": {
             "description": "Bad Request"
           },
+          "401": {
+            "description": "Unauthorized"
+          },
           "403": {
             "description": "Forbidden"
           },
@@ -172,6 +175,9 @@
           },
           "400": {
             "description": "Bad Request"
+          },
+          "401": {
+            "description": "Unauthorized"
           },
           "403": {
             "description": "Forbidden"
