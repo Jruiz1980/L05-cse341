@@ -16,6 +16,10 @@ const app = express();
 app.use(morgan('dev'));
 app.use(cors());
 
+app.get('/', (req, res) => {
+  res.status(200).send('My service is online');
+});
+
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
