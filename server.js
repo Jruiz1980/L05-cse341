@@ -70,12 +70,10 @@ app.put('/put_customers__id_', checkSellerRole, (req, res) => {
   res.send('PUT operation success');
 });
 
-app.delete(
-  '/delete',
-  checkSellerRole,
-  (req, res) => {
-    // Lógica para manejar la petición
-    res.send('DELETE operation success')});
+app.delete('/delete_customers__id_', checkSellerRole, (req, res) => {
+  // Lógica para manejar la petición
+  res.send('DELETE operation success');
+});
 
 app.use((err, req, res, next) => {
   console.error('Error message: ', err.message);
