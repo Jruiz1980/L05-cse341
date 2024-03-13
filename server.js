@@ -60,17 +60,17 @@ function checkSellerRole(req, res, next) {
 }
 
 // Usar el middleware en tus rutas
-app.post('/#/default/post_customers_', checkSellerRole, (req, res) => {
+app.post('/post/customers', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
   res.send('POST operation success');
 });
 
-app.put('/#/default/put_customers__id_', checkSellerRole, (req, res) => {
+app.put('/put/customers', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
   res.send('PUT operation success');
 });
 
-app.delete('/#/default/delete_customers__id_', checkSellerRole, (req, res) => {
+app.delete('/delete/customers', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
   res.send('DELETE operation success');
 });
