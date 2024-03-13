@@ -40,14 +40,6 @@ app.get(
   }
 );
 
-app.use((req, res, next) => {
-  if (req.isAuthenticated()) {
-    next();
-  } else {
-    res.status(401).send('User do not authenticated');
-  }
-});
-
 app
   .use(bodyParser.json())
   .use((req, res, next) => {
@@ -58,17 +50,35 @@ app
 
 
 function checkSellerRole(req, res, next) {
-  if (req.isAuthenticated() && req.user.seller) {
-    // Asumiendo que `seller` es una propiedad del usuario
+  if (!req.isAuthenticated) {
+    return res.status(401).send('User not authenticated')
+  }
+  if (req.user.seller) {
     return next();
   }
-  res.status(403).send('Acceso denegado');
+  return res.status(403).send('Denied Access')
 }
 
 // Usar el middleware en tus rutas
-app.post('/ruta-protegida', checkSellerRole, (req, res) => {
+app.post('/post', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
+  res.send('POST operation success')
 });
+
+app.put(
+  '/put',
+  checkSellerRole,
+  (req, res) => {
+    // Lógica para manejar la petición
+    res.send('PUT operation success')
+  });
+
+app.delete(
+  '/delete',
+  checkSellerRole,
+  (req, res) => {
+    // Lógica para manejar la petición
+    res.send('DELETE operation success')});
 
 app.use((err, req, res, next) => {
   console.error('Error message: ', err.message);
