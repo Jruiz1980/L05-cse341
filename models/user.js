@@ -14,7 +14,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: [ 'seller', 'admin'],
-    default: 'user'
+    default: 'seller'
   },
   // Fecha de creación y actualización
   createdAt: {
