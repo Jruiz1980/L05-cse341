@@ -19,14 +19,14 @@ router.post(
 
 router.put(
   '/:id',
-  //isAuthenticated, 
+  isAuthenticated, 
   validateSeller,
   validation.saveContact,
   customersController.updateCustomer
 );
 
 router.delete('/:id', 
-//isAuthenticated, 
+isAuthenticated, 
 validateSeller, 
 customersController.deleteCustomer);
 
