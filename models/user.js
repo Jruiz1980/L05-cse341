@@ -13,7 +13,7 @@ const userSchema = new mongoose.Schema({
 
   role: {
     type: String,
-    enum: [ 'seller', 'admin'],
+    enum: [ 'seller'],
     default: 'seller'
   },
   // Fecha de creación y actualización
@@ -31,4 +31,4 @@ userSchema.methods.isSeller = function () {
   return this.role === 'seller';
 };
 
-module.exports = mongoose.model('seller', userSchema);
+module.exports = mongoose.model('sellers', userSchema);
