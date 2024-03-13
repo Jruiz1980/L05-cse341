@@ -7,5 +7,4 @@ function isAuthenticated(req, res, next) {
   res.status(401).send({ message: 'Do not authorized' });
 };
 
-module.exports = {
-  isAuthenticated}
+module.exports = isAuthenticated;
