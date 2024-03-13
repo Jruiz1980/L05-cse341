@@ -65,12 +65,12 @@ app.post('/default/post_customers_', checkSellerRole, (req, res) => {
   res.send('POST operation success');
 });
 
-app.put('/put_customers__id_', checkSellerRole, (req, res) => {
+app.put('/default/put_customers__id_', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
   res.send('PUT operation success');
 });
 
-app.delete('/delete_customers__id_', checkSellerRole, (req, res) => {
+app.delete('/default/delete_customers__id_', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
   res.send('DELETE operation success');
 });
