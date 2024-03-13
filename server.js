@@ -60,18 +60,15 @@ function checkSellerRole(req, res, next) {
 }
 
 // Usar el middleware en tus rutas
-app.post('/post', checkSellerRole, (req, res) => {
+app.post('/default/post_customers_', checkSellerRole, (req, res) => {
   // Lógica para manejar la petición
-  res.send('POST operation success')
+  res.send('POST operation success');
 });
 
-app.put(
-  '/put',
-  checkSellerRole,
-  (req, res) => {
-    // Lógica para manejar la petición
-    res.send('PUT operation success')
-  });
+app.put('/put_customers__id_', checkSellerRole, (req, res) => {
+  // Lógica para manejar la petición
+  res.send('PUT operation success');
+});
 
 app.delete(
   '/delete',
