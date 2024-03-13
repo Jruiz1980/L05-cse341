@@ -12,10 +12,7 @@ const doc = {
       type: 'oauth2',
       authorizationUrl: 'https://project01-whrs.onrender.com/api-docs',
       flow: 'implicit',
-      scopes: {
-        'read:customers': 'read your customers',
-        'write:customers': 'modify customers in your account'
-      }
+      scopes: {}
     }
   },
   security: [
