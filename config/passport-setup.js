@@ -16,7 +16,8 @@ passport.use(
     async (accessToken, refreshToken, profile, done) => {
       console.log(profile); // Solo para propósitos de depuración
       try {
-        let seller = await Seller.findOne({ googleId: profile.id });
+        const googleId = profile.id;
+        const seller = await Seller.findOne({ googleId });
         if (!seller) {
           // El vendedor no existe, crea un nuevo vendedor
           seller = new Seller({
@@ -35,6 +36,7 @@ passport.use(
     }
   )
 );
+
 // Serialize y deserialize user
 passport.serializeUser(function (seller, done) {
   done(null, seller.id);
