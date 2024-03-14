@@ -64,19 +64,16 @@ function checkSellerRole(req, res, next) {
   return res.status(403).send('Denied Access')
 }
 
-// Usar el middleware en tus rutas
+
 app.post('/post/customers', checkSellerRole, (req, res) => {
-  // Lógica para manejar la petición
   res.send('POST operation success');
 });
 
 app.put('/put/customers', checkSellerRole, (req, res) => {
-  // Lógica para manejar la petición
   res.send('PUT operation success');
 });
 
 app.delete('/delete/customers', checkSellerRole, (req, res) => {
-  // Lógica para manejar la petición
   res.send('DELETE operation success');
 });
 

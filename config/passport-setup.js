@@ -2,7 +2,7 @@ const passport = require('passport');
 const Seller = require('../models/seller');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const dotenv = require('dotenv');
-const validator = require('validator'); // For email validation
+const validator = require('validator');
 
 dotenv.config();
 
@@ -14,17 +14,16 @@ passport.use(
       callbackURL: 'https://project01-whrs.onrender.com/api-docs'
     },
     async (accessToken, refreshToken, profile, done) => {
-      console.log(profile); // Solo para propósitos de depuración
+      console.log(profile);
       try {
         const googleId = profile.id;
         const seller = await Seller.findOne({ googleId });
         if (!seller) {
-          // El vendedor no existe, crea un nuevo vendedor
           seller = new Seller({
             googleId: profile.id,
-            email: validator.isEmail(profile.emails[0].value) ? profile.emails[0].value : '', // Sanitizar email
+            email: validator.isEmail(profile.emails[0].value) ? profile.emails[0].value : '',
             name: profile.displayName
-            // Agrega cualquier otro campo necesario
+    
           });
           await seller.save();
         }
@@ -36,7 +35,7 @@ passport.use(
     }
   )
 );
-// Serialize y deserialize user
+
 passport.serializeUser(function (seller, done) {
   done(null, seller.id);
 });

@@ -1,4 +1,3 @@
-// middleware/auth.js
 function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     req.seller = req.user.seller;

@@ -16,7 +16,7 @@ const userSchema = new mongoose.Schema({
     enum: [ 'seller'],
     default: 'seller'
   },
-  // Fecha de creación y actualización
+
   createdAt: {
     type: Date,
     default: Date.now
