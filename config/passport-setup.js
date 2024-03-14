@@ -36,7 +36,6 @@ passport.use(
     }
   )
 );
-
 // Serialize y deserialize user
 passport.serializeUser(function (seller, done) {
   done(null, seller.id);
