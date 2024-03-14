@@ -39,6 +39,8 @@ const createCustomer = [
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
+  body('city').notEmpty().withMessage('The city field is required.'),
+  body('district').notEmpty().withMessage('The district field is required.'),
 
   async (req, res) => {
     const errors = validationResult(req);
@@ -77,6 +79,8 @@ const updateCustomer = [
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
+  body('city').notEmpty().withMessage('The city field is required.'),
+  body('district').notEmpty().withMessage('The district field is required.'),
 
   async (req, res) => {
     const userId = req.params.id;
@@ -100,6 +104,8 @@ const updateCustomer = [
     if (req.body.email) customer.email = req.body.email;
     if (req.body.address) customer.address = req.body.address;
     if (req.body.storeName) customer.storeName = req.body.storeName;
+    if (req.body.city) customer.city = req.body.city;
+    if (req.body.district) customer.district = req.body.district;
 
     try {
       const response = await mongodb

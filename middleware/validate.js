@@ -6,6 +6,8 @@ const saveContact = [
   body('email').isEmail().withMessage('The email field must be a valid email.'),
   body('address').optional().isString(),
   body('storeName').notEmpty().withMessage('The store name field is required.'),
+  body('city').notEmpty().withMessage('The city field is required.'),
+  body('district').notEmpty().withMessage('The district field is required.'),
 
   (req, res, next) => {
     const errors = validationResult(req);
