@@ -133,6 +133,12 @@
                 },
                 "storeName": {
                   "example": "any"
+                },
+                "city": {
+                  "example": "any"
+                },
+                "district": {
+                  "example": "any"
                 }
               }
             }
