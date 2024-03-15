@@ -57,7 +57,9 @@ const createCustomer = [
       lastName: req.body.lastName,
       email: req.body.email,
       address: req.body.address,
-      storeName: req.body.storeName
+      storeName: req.body.storeName,
+      city: req.body.city,
+      district: req.body.district
     };
 
     try {
