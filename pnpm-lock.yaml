@@ -7,7 +7,7 @@ settings:
 importers:
 
   .:
-    dependencies:
+    devDependencies:
       body-parser:
         specifier: ^1.20.2
         version: 1.20.2
@@ -59,7 +59,7 @@ packages:
   '@eslint-community/eslint-utils@4.4.1':
     resolution: {integrity: sha512-s3O3waFUrMV8P/XaF/+ZTp1X9XBZW1a4B97ZnjQF2KYWaFD2A8KyFBsrsfSjEmjn3RGWAIuvlneuZm3CUK3jbA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
-    peerDependencies:
+    peerdevDependencies:
       eslint: ^6.0.0 || ^7.0.0 || >=8.0.0
 
   '@eslint-community/regexpp@4.12.1':
@@ -136,7 +136,7 @@ packages:
 
   acorn-jsx@5.3.2:
     resolution: {integrity: sha512-rq9s+JNhf0IChjtDXxllJ7g41oZk5SlXtp0LHwyA5cejwn7vKmKp4pPri6YEePv2PU65sAsegbXtIinmDFDXgQ==}
-    peerDependencies:
+    peerdevDependencies:
       acorn: ^6.0.0 || ^7.0.0 || ^8.0.0
 
   acorn@7.4.1:
@@ -383,27 +383,27 @@ packages:
 
   debug@2.6.9:
     resolution: {integrity: sha512-bC7ElrdJaJnPbAP+1EotYvqZsb3ecl5wi6Bfi6BJTUcNowp6cvspg0jXznRTKDjm/E7AdgFBVeAPVMNcKGsHMA==}
-    peerDependencies:
+    peerdevDependencies:
       supports-color: '*'
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       supports-color:
         optional: true
 
   debug@4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
     engines: {node: '>=6.0'}
-    peerDependencies:
+    peerdevDependencies:
       supports-color: '*'
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       supports-color:
         optional: true
 
   debug@4.4.0:
     resolution: {integrity: sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==}
     engines: {node: '>=6.0'}
-    peerDependencies:
+    peerdevDependencies:
       supports-color: '*'
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       supports-color:
         optional: true
 
@@ -503,12 +503,12 @@ packages:
   eslint-plugin-prettier@5.1.3:
     resolution: {integrity: sha512-C9GCVAs4Eq7ZC/XFQHITLiHJxQngdtraXaM+LoUFoFp/lHNl2Zn8f3WQbe9HvTBBQ9YnKFB0/2Ajdqwo5D1EAw==}
     engines: {node: ^14.18.0 || >=16.0.0}
-    peerDependencies:
+    peerdevDependencies:
       '@types/eslint': '>=8.0.0'
       eslint: '>=8.0.0'
       eslint-config-prettier: '*'
       prettier: '>=3.0.0'
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       '@types/eslint':
         optional: true
       eslint-config-prettier:
@@ -517,7 +517,7 @@ packages:
   eslint-plugin-react@7.33.2:
     resolution: {integrity: sha512-73QQMKALArI8/7xGLNI/3LylrEYrlKZSb5C9+q3OtOewTnMQi5cT+aE9E41sLCmli3I9PGGmD1yiZydyo4FEPw==}
     engines: {node: '>=4'}
-    peerDependencies:
+    peerdevDependencies:
       eslint: ^3 || ^4 || ^5 || ^6 || ^7 || ^8
 
   eslint-scope@7.2.2:
@@ -1056,7 +1056,7 @@ packages:
   mongodb@6.12.0:
     resolution: {integrity: sha512-RM7AHlvYfS7jv7+BXund/kR64DryVI+cHbVAy9P61fnb1RcWZqOW1/Wj2YhqMCx+MuYhqTRGv7AwHBzmsCKBfA==}
     engines: {node: '>=16.20.1'}
-    peerDependencies:
+    peerdevDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
       '@mongodb-js/zstd': ^1.1.0 || ^2.0.0
       gcp-metadata: ^5.2.0
@@ -1064,7 +1064,7 @@ packages:
       mongodb-client-encryption: '>=6.0.0 <7'
       snappy: ^7.2.2
       socks: ^2.7.1
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       '@aws-sdk/credential-providers':
         optional: true
       '@mongodb-js/zstd':
@@ -1083,7 +1083,7 @@ packages:
   mongodb@6.3.0:
     resolution: {integrity: sha512-tt0KuGjGtLUhLoU263+xvQmPHEGTw5LbcNC73EoFRYgSHwZt5tsoJC110hDyO1kjQzpgNrpdcSza9PknWN4LrA==}
     engines: {node: '>=16.20.1'}
-    peerDependencies:
+    peerdevDependencies:
       '@aws-sdk/credential-providers': ^3.188.0
       '@mongodb-js/zstd': ^1.1.0
       gcp-metadata: ^5.2.0
@@ -1091,7 +1091,7 @@ packages:
       mongodb-client-encryption: '>=6.0.0 <7'
       snappy: ^7.2.2
       socks: ^2.7.1
-    peerDependenciesMeta:
+    peerdevDependenciesMeta:
       '@aws-sdk/credential-providers':
         optional: true
       '@mongodb-js/zstd':
@@ -1528,7 +1528,7 @@ packages:
   swagger-ui-express@5.0.0:
     resolution: {integrity: sha512-tsU9tODVvhyfkNSvf03E6FAk+z+5cU3lXAzMy6Pv4av2Gt2xA0++fogwC4qo19XuFf6hdxevPuVCSKFuMHJhFA==}
     engines: {node: '>= v0.10.32'}
-    peerDependencies:
+    peerdevDependencies:
       express: '>=4.0.0 || >=5.0.0-beta'
 
   synckit@0.8.8:
@@ -1720,14 +1720,14 @@ packages:
 snapshots:
 
   '@eslint-community/eslint-utils@4.4.1(eslint@8.56.0)':
-    dependencies:
+    devDependencies:
       eslint: 8.56.0
       eslint-visitor-keys: 3.4.3
 
   '@eslint-community/regexpp@4.12.1': {}
 
   '@eslint/eslintrc@2.1.4':
-    dependencies:
+    devDependencies:
       ajv: 6.12.6
       debug: 4.4.0
       espree: 9.6.1
@@ -1737,17 +1737,17 @@ snapshots:
       js-yaml: 4.1.0
       minimatch: 3.1.2
       strip-json-comments: 3.1.1
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   '@eslint/js@8.56.0': {}
 
   '@humanwhocodes/config-array@0.11.14':
-    dependencies:
+    devDependencies:
       '@humanwhocodes/object-schema': 2.0.3
       debug: 4.4.0
       minimatch: 3.1.2
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   '@humanwhocodes/module-importer@1.0.1': {}
@@ -1755,30 +1755,30 @@ snapshots:
   '@humanwhocodes/object-schema@2.0.3': {}
 
   '@kwsites/file-exists@1.1.1':
-    dependencies:
+    devDependencies:
       debug: 4.4.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   '@kwsites/promise-deferred@1.1.1': {}
 
   '@mongodb-js/saslprep@1.1.4':
-    dependencies:
+    devDependencies:
       sparse-bitfield: 3.0.3
 
   '@mongodb-js/saslprep@1.1.9':
-    dependencies:
+    devDependencies:
       sparse-bitfield: 3.0.3
 
   '@nodelib/fs.scandir@2.1.5':
-    dependencies:
+    devDependencies:
       '@nodelib/fs.stat': 2.0.5
       run-parallel: 1.2.0
 
   '@nodelib/fs.stat@2.0.5': {}
 
   '@nodelib/fs.walk@1.2.8':
-    dependencies:
+    devDependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.19.0
 
@@ -1787,11 +1787,11 @@ snapshots:
   '@types/webidl-conversions@7.0.3': {}
 
   '@types/whatwg-url@11.0.4':
-    dependencies:
+    devDependencies:
       '@types/webidl-conversions': 7.0.3
 
   '@types/whatwg-url@11.0.5':
-    dependencies:
+    devDependencies:
       '@types/webidl-conversions': 7.0.3
 
   '@ungap/structured-clone@1.3.0': {}
@@ -1799,12 +1799,12 @@ snapshots:
   abbrev@1.1.1: {}
 
   accepts@1.3.8:
-    dependencies:
+    devDependencies:
       mime-types: 2.1.35
       negotiator: 0.6.3
 
   acorn-jsx@5.3.2(acorn@8.14.0):
-    dependencies:
+    devDependencies:
       acorn: 8.14.0
 
   acorn@7.4.1: {}
@@ -1812,7 +1812,7 @@ snapshots:
   acorn@8.14.0: {}
 
   ajv@6.12.6:
-    dependencies:
+    devDependencies:
       fast-deep-equal: 3.1.3
       fast-json-stable-stringify: 2.1.0
       json-schema-traverse: 0.4.1
@@ -1827,33 +1827,33 @@ snapshots:
   ansi-regex@5.0.1: {}
 
   ansi-styles@3.2.1:
-    dependencies:
+    devDependencies:
       color-convert: 1.9.3
 
   ansi-styles@4.3.0:
-    dependencies:
+    devDependencies:
       color-convert: 2.0.1
 
   anymatch@3.1.3:
-    dependencies:
+    devDependencies:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
   argparse@1.0.10:
-    dependencies:
+    devDependencies:
       sprintf-js: 1.0.3
 
   argparse@2.0.1: {}
 
   array-buffer-byte-length@1.0.1:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       is-array-buffer: 3.0.4
 
   array-flatten@1.1.1: {}
 
   array-includes@3.1.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
@@ -1861,21 +1861,21 @@ snapshots:
       is-string: 1.0.7
 
   array.prototype.flat@1.3.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
       es-shim-unscopables: 1.0.2
 
   array.prototype.flatmap@1.3.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
       es-shim-unscopables: 1.0.2
 
   array.prototype.tosorted@1.1.3:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
@@ -1883,7 +1883,7 @@ snapshots:
       es-shim-unscopables: 1.0.2
 
   arraybuffer.prototype.slice@1.0.3:
-    dependencies:
+    devDependencies:
       array-buffer-byte-length: 1.0.1
       call-bind: 1.0.6
       define-properties: 1.2.1
@@ -1894,13 +1894,13 @@ snapshots:
       is-shared-array-buffer: 1.0.2
 
   asn1@0.2.6:
-    dependencies:
+    devDependencies:
       safer-buffer: 2.1.2
 
   assert-plus@1.0.0: {}
 
   asynciterator.prototype@1.0.0:
-    dependencies:
+    devDependencies:
       has-symbols: 1.0.3
 
   asynckit@0.4.0: {}
@@ -1914,13 +1914,13 @@ snapshots:
   balanced-match@1.0.2: {}
 
   bcrypt-pbkdf@1.0.2:
-    dependencies:
+    devDependencies:
       tweetnacl: 0.14.5
 
   binary-extensions@2.2.0: {}
 
   body-parser@1.20.1:
-    dependencies:
+    devDependencies:
       bytes: 3.1.2
       content-type: 1.0.5
       debug: 2.6.9
@@ -1933,11 +1933,11 @@ snapshots:
       raw-body: 2.5.1
       type-is: 1.6.18
       unpipe: 1.0.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   body-parser@1.20.2:
-    dependencies:
+    devDependencies:
       bytes: 3.1.2
       content-type: 1.0.5
       debug: 2.6.9
@@ -1950,16 +1950,16 @@ snapshots:
       raw-body: 2.5.2
       type-is: 1.6.18
       unpipe: 1.0.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   brace-expansion@1.1.11:
-    dependencies:
+    devDependencies:
       balanced-match: 1.0.2
       concat-map: 0.0.1
 
   braces@3.0.2:
-    dependencies:
+    devDependencies:
       fill-range: 7.0.1
 
   bson@6.10.2: {}
@@ -1969,7 +1969,7 @@ snapshots:
   bytes@3.1.2: {}
 
   call-bind@1.0.6:
-    dependencies:
+    devDependencies:
       es-errors: 1.3.0
       function-bind: 1.1.2
       get-intrinsic: 1.2.4
@@ -1982,20 +1982,20 @@ snapshots:
   caseless@0.12.0: {}
 
   chalk@2.4.2:
-    dependencies:
+    devDependencies:
       ansi-styles: 3.2.1
       escape-string-regexp: 1.0.5
       supports-color: 5.5.0
 
   chalk@4.1.2:
-    dependencies:
+    devDependencies:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
 
   chardet@0.7.0: {}
 
   chokidar@3.6.0:
-    dependencies:
+    devDependencies:
       anymatch: 3.1.3
       braces: 3.0.2
       glob-parent: 5.1.2
@@ -2003,23 +2003,23 @@ snapshots:
       is-glob: 4.0.3
       normalize-path: 3.0.0
       readdirp: 3.6.0
-    optionalDependencies:
+    optionaldevDependencies:
       fsevents: 2.3.3
 
   cli-cursor@2.1.0:
-    dependencies:
+    devDependencies:
       restore-cursor: 2.0.0
 
   cli-spinners@2.9.2: {}
 
   cli-table@0.3.11:
-    dependencies:
+    devDependencies:
       colors: 1.0.3
 
   cli-width@2.2.1: {}
 
   cliui@5.0.0:
-    dependencies:
+    devDependencies:
       string-width: 3.1.0
       strip-ansi: 5.2.0
       wrap-ansi: 5.1.0
@@ -2027,11 +2027,11 @@ snapshots:
   clone@1.0.4: {}
 
   color-convert@1.9.3:
-    dependencies:
+    devDependencies:
       color-name: 1.1.3
 
   color-convert@2.0.1:
-    dependencies:
+    devDependencies:
       color-name: 1.1.4
 
   color-name@1.1.3: {}
@@ -2041,7 +2041,7 @@ snapshots:
   colors@1.0.3: {}
 
   combined-stream@1.0.8:
-    dependencies:
+    devDependencies:
       delayed-stream: 1.0.0
 
   commander@2.20.3: {}
@@ -2049,7 +2049,7 @@ snapshots:
   concat-map@0.0.1: {}
 
   content-disposition@0.5.4:
-    dependencies:
+    devDependencies:
       safe-buffer: 5.2.1
 
   content-type@1.0.5: {}
@@ -2061,32 +2061,32 @@ snapshots:
   core-util-is@1.0.2: {}
 
   cors@2.8.5:
-    dependencies:
+    devDependencies:
       object-assign: 4.1.1
       vary: 1.1.2
 
   cross-spawn@7.0.6:
-    dependencies:
+    devDependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
       which: 2.0.2
 
   dashdash@1.14.1:
-    dependencies:
+    devDependencies:
       assert-plus: 1.0.0
 
   debug@2.6.9:
-    dependencies:
+    devDependencies:
       ms: 2.0.0
 
   debug@4.3.4(supports-color@5.5.0):
-    dependencies:
+    devDependencies:
       ms: 2.1.2
-    optionalDependencies:
+    optionaldevDependencies:
       supports-color: 5.5.0
 
   debug@4.4.0:
-    dependencies:
+    devDependencies:
       ms: 2.1.3
 
   decamelize@1.2.0: {}
@@ -2096,18 +2096,18 @@ snapshots:
   deepmerge@4.3.1: {}
 
   defaults@1.0.4:
-    dependencies:
+    devDependencies:
       clone: 1.0.4
 
   define-data-property@1.1.2:
-    dependencies:
+    devDependencies:
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
       gopd: 1.0.1
       has-property-descriptors: 1.0.1
 
   define-properties@1.2.1:
-    dependencies:
+    devDependencies:
       define-data-property: 1.1.2
       has-property-descriptors: 1.0.1
       object-keys: 1.1.1
@@ -2119,17 +2119,17 @@ snapshots:
   destroy@1.2.0: {}
 
   doctrine@2.1.0:
-    dependencies:
+    devDependencies:
       esutils: 2.0.3
 
   doctrine@3.0.0:
-    dependencies:
+    devDependencies:
       esutils: 2.0.3
 
   dotenv@16.4.1: {}
 
   ecc-jsbn@0.1.2:
-    dependencies:
+    devDependencies:
       jsbn: 0.1.1
       safer-buffer: 2.1.2
 
@@ -2140,7 +2140,7 @@ snapshots:
   encodeurl@1.0.2: {}
 
   es-abstract@1.22.3:
-    dependencies:
+    devDependencies:
       array-buffer-byte-length: 1.0.1
       arraybuffer.prototype.slice: 1.0.3
       available-typed-arrays: 1.0.6
@@ -2184,7 +2184,7 @@ snapshots:
   es-errors@1.3.0: {}
 
   es-iterator-helpers@1.0.16:
-    dependencies:
+    devDependencies:
       asynciterator.prototype: 1.0.0
       call-bind: 1.0.6
       define-properties: 1.2.1
@@ -2202,17 +2202,17 @@ snapshots:
       safe-array-concat: 1.1.0
 
   es-set-tostringtag@2.0.2:
-    dependencies:
+    devDependencies:
       get-intrinsic: 1.2.4
       has-tostringtag: 1.0.2
       hasown: 2.0.0
 
   es-shim-unscopables@1.0.2:
-    dependencies:
+    devDependencies:
       hasown: 2.0.0
 
   es-to-primitive@1.2.1:
-    dependencies:
+    devDependencies:
       is-callable: 1.2.7
       is-date-object: 1.0.5
       is-symbol: 1.0.4
@@ -2224,14 +2224,14 @@ snapshots:
   escape-string-regexp@4.0.0: {}
 
   eslint-plugin-prettier@5.1.3(eslint@8.56.0)(prettier@3.2.5):
-    dependencies:
+    devDependencies:
       eslint: 8.56.0
       prettier: 3.2.5
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
 
   eslint-plugin-react@7.33.2(eslint@8.56.0):
-    dependencies:
+    devDependencies:
       array-includes: 3.1.7
       array.prototype.flatmap: 1.3.2
       array.prototype.tosorted: 1.1.3
@@ -2251,14 +2251,14 @@ snapshots:
       string.prototype.matchall: 4.0.10
 
   eslint-scope@7.2.2:
-    dependencies:
+    devDependencies:
       esrecurse: 4.3.0
       estraverse: 5.3.0
 
   eslint-visitor-keys@3.4.3: {}
 
   eslint@8.56.0:
-    dependencies:
+    devDependencies:
       '@eslint-community/eslint-utils': 4.4.1(eslint@8.56.0)
       '@eslint-community/regexpp': 4.12.1
       '@eslint/eslintrc': 2.1.4
@@ -2297,11 +2297,11 @@ snapshots:
       optionator: 0.9.4
       strip-ansi: 6.0.1
       text-table: 0.2.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   espree@9.6.1:
-    dependencies:
+    devDependencies:
       acorn: 8.14.0
       acorn-jsx: 5.3.2(acorn@8.14.0)
       eslint-visitor-keys: 3.4.3
@@ -2309,11 +2309,11 @@ snapshots:
   esprima@4.0.1: {}
 
   esquery@1.6.0:
-    dependencies:
+    devDependencies:
       estraverse: 5.3.0
 
   esrecurse@4.3.0:
-    dependencies:
+    devDependencies:
       estraverse: 5.3.0
 
   estraverse@5.3.0: {}
@@ -2323,12 +2323,12 @@ snapshots:
   etag@1.8.1: {}
 
   express-validator@7.0.1:
-    dependencies:
+    devDependencies:
       lodash: 4.17.21
       validator: 13.11.0
 
   express@4.18.2:
-    dependencies:
+    devDependencies:
       accepts: 1.3.8
       array-flatten: 1.1.1
       body-parser: 1.20.1
@@ -2360,17 +2360,17 @@ snapshots:
       type-is: 1.6.18
       utils-merge: 1.0.1
       vary: 1.1.2
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   extend-shallow@2.0.1:
-    dependencies:
+    devDependencies:
       is-extendable: 0.1.1
 
   extend@3.0.2: {}
 
   external-editor@3.1.0:
-    dependencies:
+    devDependencies:
       chardet: 0.7.0
       iconv-lite: 0.4.24
       tmp: 0.0.33
@@ -2386,23 +2386,23 @@ snapshots:
   fast-levenshtein@2.0.6: {}
 
   fastq@1.19.0:
-    dependencies:
+    devDependencies:
       reusify: 1.0.4
 
   figures@2.0.0:
-    dependencies:
+    devDependencies:
       escape-string-regexp: 1.0.5
 
   file-entry-cache@6.0.1:
-    dependencies:
+    devDependencies:
       flat-cache: 3.2.0
 
   fill-range@7.0.1:
-    dependencies:
+    devDependencies:
       to-regex-range: 5.0.1
 
   finalhandler@1.2.0:
-    dependencies:
+    devDependencies:
       debug: 2.6.9
       encodeurl: 1.0.2
       escape-html: 1.0.3
@@ -2410,20 +2410,20 @@ snapshots:
       parseurl: 1.3.3
       statuses: 2.0.1
       unpipe: 1.0.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   find-up@3.0.0:
-    dependencies:
+    devDependencies:
       locate-path: 3.0.0
 
   find-up@5.0.0:
-    dependencies:
+    devDependencies:
       locate-path: 6.0.0
       path-exists: 4.0.0
 
   flat-cache@3.2.0:
-    dependencies:
+    devDependencies:
       flatted: 3.3.2
       keyv: 4.5.4
       rimraf: 3.0.2
@@ -2431,13 +2431,13 @@ snapshots:
   flatted@3.3.2: {}
 
   for-each@0.3.3:
-    dependencies:
+    devDependencies:
       is-callable: 1.2.7
 
   forever-agent@0.6.1: {}
 
   form-data@2.3.3:
-    dependencies:
+    devDependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
       mime-types: 2.1.35
@@ -2456,7 +2456,7 @@ snapshots:
   function-bind@1.1.2: {}
 
   function.prototype.name@1.1.6:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
@@ -2467,7 +2467,7 @@ snapshots:
   get-caller-file@2.0.5: {}
 
   get-intrinsic@1.2.4:
-    dependencies:
+    devDependencies:
       es-errors: 1.3.0
       function-bind: 1.1.2
       has-proto: 1.0.1
@@ -2475,25 +2475,25 @@ snapshots:
       hasown: 2.0.0
 
   get-symbol-description@1.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
 
   getpass@0.1.7:
-    dependencies:
+    devDependencies:
       assert-plus: 1.0.0
 
   glob-parent@5.1.2:
-    dependencies:
+    devDependencies:
       is-glob: 4.0.3
 
   glob-parent@6.0.2:
-    dependencies:
+    devDependencies:
       is-glob: 4.0.3
 
   glob@7.2.3:
-    dependencies:
+    devDependencies:
       fs.realpath: 1.0.0
       inflight: 1.0.6
       inherits: 2.0.4
@@ -2502,15 +2502,15 @@ snapshots:
       path-is-absolute: 1.0.1
 
   globals@13.24.0:
-    dependencies:
+    devDependencies:
       type-fest: 0.20.2
 
   globalthis@1.0.3:
-    dependencies:
+    devDependencies:
       define-properties: 1.2.1
 
   gopd@1.0.1:
-    dependencies:
+    devDependencies:
       get-intrinsic: 1.2.4
 
   graphemer@1.4.0: {}
@@ -2518,7 +2518,7 @@ snapshots:
   har-schema@2.0.0: {}
 
   har-validator@5.1.5:
-    dependencies:
+    devDependencies:
       ajv: 6.12.6
       har-schema: 2.0.0
 
@@ -2529,7 +2529,7 @@ snapshots:
   has-flag@4.0.0: {}
 
   has-property-descriptors@1.0.1:
-    dependencies:
+    devDependencies:
       get-intrinsic: 1.2.4
 
   has-proto@1.0.1: {}
@@ -2537,15 +2537,15 @@ snapshots:
   has-symbols@1.0.3: {}
 
   has-tostringtag@1.0.2:
-    dependencies:
+    devDependencies:
       has-symbols: 1.0.3
 
   hasown@2.0.0:
-    dependencies:
+    devDependencies:
       function-bind: 1.1.2
 
   http-errors@2.0.0:
-    dependencies:
+    devDependencies:
       depd: 2.0.0
       inherits: 2.0.4
       setprototypeof: 1.2.0
@@ -2553,13 +2553,13 @@ snapshots:
       toidentifier: 1.0.1
 
   http-signature@1.2.0:
-    dependencies:
+    devDependencies:
       assert-plus: 1.0.0
       jsprim: 1.4.2
       sshpk: 1.18.0
 
   iconv-lite@0.4.24:
-    dependencies:
+    devDependencies:
       safer-buffer: 2.1.2
 
   ignore-by-default@1.0.1: {}
@@ -2567,21 +2567,21 @@ snapshots:
   ignore@5.3.2: {}
 
   import-fresh@3.3.1:
-    dependencies:
+    devDependencies:
       parent-module: 1.0.1
       resolve-from: 4.0.0
 
   imurmurhash@0.1.4: {}
 
   inflight@1.0.6:
-    dependencies:
+    devDependencies:
       once: 1.4.0
       wrappy: 1.0.2
 
   inherits@2.0.4: {}
 
   inquirer@6.5.2:
-    dependencies:
+    devDependencies:
       ansi-escapes: 3.2.0
       chalk: 2.4.2
       cli-cursor: 2.1.0
@@ -2597,7 +2597,7 @@ snapshots:
       through: 2.3.8
 
   internal-slot@1.0.7:
-    dependencies:
+    devDependencies:
       es-errors: 1.3.0
       hasown: 2.0.0
       side-channel: 1.0.5
@@ -2605,35 +2605,35 @@ snapshots:
   ipaddr.js@1.9.1: {}
 
   is-array-buffer@3.0.4:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       get-intrinsic: 1.2.4
 
   is-async-function@2.0.0:
-    dependencies:
+    devDependencies:
       has-tostringtag: 1.0.2
 
   is-bigint@1.0.4:
-    dependencies:
+    devDependencies:
       has-bigints: 1.0.2
 
   is-binary-path@2.1.0:
-    dependencies:
+    devDependencies:
       binary-extensions: 2.2.0
 
   is-boolean-object@1.1.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       has-tostringtag: 1.0.2
 
   is-callable@1.2.7: {}
 
   is-core-module@2.13.1:
-    dependencies:
+    devDependencies:
       hasown: 2.0.0
 
   is-date-object@1.0.5:
-    dependencies:
+    devDependencies:
       has-tostringtag: 1.0.2
 
   is-extendable@0.1.1: {}
@@ -2641,17 +2641,17 @@ snapshots:
   is-extglob@2.1.1: {}
 
   is-finalizationregistry@1.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
 
   is-fullwidth-code-point@2.0.0: {}
 
   is-generator-function@1.0.10:
-    dependencies:
+    devDependencies:
       has-tostringtag: 1.0.2
 
   is-glob@4.0.3:
-    dependencies:
+    devDependencies:
       is-extglob: 2.1.1
 
   is-map@2.0.2: {}
@@ -2659,7 +2659,7 @@ snapshots:
   is-negative-zero@2.0.2: {}
 
   is-number-object@1.0.7:
-    dependencies:
+    devDependencies:
       has-tostringtag: 1.0.2
 
   is-number@7.0.0: {}
@@ -2667,26 +2667,26 @@ snapshots:
   is-path-inside@3.0.3: {}
 
   is-regex@1.1.4:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       has-tostringtag: 1.0.2
 
   is-set@2.0.2: {}
 
   is-shared-array-buffer@1.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
 
   is-string@1.0.7:
-    dependencies:
+    devDependencies:
       has-tostringtag: 1.0.2
 
   is-symbol@1.0.4:
-    dependencies:
+    devDependencies:
       has-symbols: 1.0.3
 
   is-typed-array@1.1.13:
-    dependencies:
+    devDependencies:
       which-typed-array: 1.1.14
 
   is-typedarray@1.0.0: {}
@@ -2694,11 +2694,11 @@ snapshots:
   is-weakmap@2.0.1: {}
 
   is-weakref@1.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
 
   is-weakset@2.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       get-intrinsic: 1.2.4
 
@@ -2709,7 +2709,7 @@ snapshots:
   isstream@0.1.2: {}
 
   iterator.prototype@1.1.2:
-    dependencies:
+    devDependencies:
       define-properties: 1.2.1
       get-intrinsic: 1.2.4
       has-symbols: 1.0.3
@@ -2719,12 +2719,12 @@ snapshots:
   js-tokens@4.0.0: {}
 
   js-yaml@3.14.1:
-    dependencies:
+    devDependencies:
       argparse: 1.0.10
       esprima: 4.0.1
 
   js-yaml@4.1.0:
-    dependencies:
+    devDependencies:
       argparse: 2.0.1
 
   jsbn@0.1.1: {}
@@ -2742,14 +2742,14 @@ snapshots:
   json5@2.2.3: {}
 
   jsprim@1.4.2:
-    dependencies:
+    devDependencies:
       assert-plus: 1.0.0
       extsprintf: 1.3.0
       json-schema: 0.4.0
       verror: 1.10.0
 
   jsx-ast-utils@3.3.5:
-    dependencies:
+    devDependencies:
       array-includes: 3.1.7
       array.prototype.flat: 1.3.2
       object.assign: 4.1.5
@@ -2758,16 +2758,16 @@ snapshots:
   kareem@2.6.3: {}
 
   keyv@4.5.4:
-    dependencies:
+    devDependencies:
       json-buffer: 3.0.1
 
   levn@0.4.1:
-    dependencies:
+    devDependencies:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
   lint@0.8.19:
-    dependencies:
+    devDependencies:
       chalk: 2.4.2
       cli-table: 0.3.11
       commander: 2.20.3
@@ -2781,18 +2781,18 @@ snapshots:
       request: 2.88.2
       simple-git: 3.22.0
       write-yaml: 1.0.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   loadash@1.0.0: {}
 
   locate-path@3.0.0:
-    dependencies:
+    devDependencies:
       p-locate: 3.0.0
       path-exists: 3.0.0
 
   locate-path@6.0.0:
-    dependencies:
+    devDependencies:
       p-locate: 5.0.0
 
   lodash.merge@4.6.2: {}
@@ -2800,15 +2800,15 @@ snapshots:
   lodash@4.17.21: {}
 
   log-symbols@2.2.0:
-    dependencies:
+    devDependencies:
       chalk: 2.4.2
 
   loose-envify@1.4.0:
-    dependencies:
+    devDependencies:
       js-tokens: 4.0.0
 
   lru-cache@6.0.0:
-    dependencies:
+    devDependencies:
       yallist: 4.0.0
 
   media-typer@0.3.0: {}
@@ -2822,7 +2822,7 @@ snapshots:
   mime-db@1.52.0: {}
 
   mime-types@2.1.35:
-    dependencies:
+    devDependencies:
       mime-db: 1.52.0
 
   mime@1.6.0: {}
@@ -2830,41 +2830,41 @@ snapshots:
   mimic-fn@1.2.0: {}
 
   minimatch@3.1.2:
-    dependencies:
+    devDependencies:
       brace-expansion: 1.1.11
 
   minimist@1.2.8: {}
 
   mkdirp@0.5.6:
-    dependencies:
+    devDependencies:
       minimist: 1.2.8
 
   moment@2.30.1: {}
 
   mongodb-connection-string-url@3.0.0:
-    dependencies:
+    devDependencies:
       '@types/whatwg-url': 11.0.4
       whatwg-url: 13.0.0
 
   mongodb-connection-string-url@3.0.2:
-    dependencies:
+    devDependencies:
       '@types/whatwg-url': 11.0.5
       whatwg-url: 14.1.0
 
   mongodb@6.12.0:
-    dependencies:
+    devDependencies:
       '@mongodb-js/saslprep': 1.1.9
       bson: 6.10.2
       mongodb-connection-string-url: 3.0.2
 
   mongodb@6.3.0:
-    dependencies:
+    devDependencies:
       '@mongodb-js/saslprep': 1.1.4
       bson: 6.3.0
       mongodb-connection-string-url: 3.0.0
 
   mongoose@8.9.5:
-    dependencies:
+    devDependencies:
       bson: 6.10.2
       kareem: 2.6.3
       mongodb: 6.12.0
@@ -2872,7 +2872,7 @@ snapshots:
       mquery: 5.0.0
       ms: 2.1.3
       sift: 17.1.3
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - '@aws-sdk/credential-providers'
       - '@mongodb-js/zstd'
       - gcp-metadata
@@ -2885,9 +2885,9 @@ snapshots:
   mpath@0.9.0: {}
 
   mquery@5.0.0:
-    dependencies:
+    devDependencies:
       debug: 4.4.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   ms@2.0.0: {}
@@ -2903,7 +2903,7 @@ snapshots:
   negotiator@0.6.3: {}
 
   nodemon@3.0.3:
-    dependencies:
+    devDependencies:
       chokidar: 3.6.0
       debug: 4.3.4(supports-color@5.5.0)
       ignore-by-default: 1.0.1
@@ -2916,7 +2916,7 @@ snapshots:
       undefsafe: 2.0.5
 
   nopt@1.0.10:
-    dependencies:
+    devDependencies:
       abbrev: 1.1.1
 
   normalize-path@3.0.0: {}
@@ -2930,49 +2930,49 @@ snapshots:
   object-keys@1.1.1: {}
 
   object.assign@4.1.5:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       has-symbols: 1.0.3
       object-keys: 1.1.1
 
   object.entries@1.1.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   object.fromentries@2.0.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   object.hasown@1.1.3:
-    dependencies:
+    devDependencies:
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   object.values@1.1.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   on-finished@2.4.1:
-    dependencies:
+    devDependencies:
       ee-first: 1.1.1
 
   once@1.4.0:
-    dependencies:
+    devDependencies:
       wrappy: 1.0.2
 
   onetime@2.0.1:
-    dependencies:
+    devDependencies:
       mimic-fn: 1.2.0
 
   optionator@0.9.4:
-    dependencies:
+    devDependencies:
       deep-is: 0.1.4
       fast-levenshtein: 2.0.6
       levn: 0.4.1
@@ -2981,7 +2981,7 @@ snapshots:
       word-wrap: 1.2.5
 
   ora@3.4.0:
-    dependencies:
+    devDependencies:
       chalk: 2.4.2
       cli-cursor: 2.1.0
       cli-spinners: 2.9.2
@@ -2992,25 +2992,25 @@ snapshots:
   os-tmpdir@1.0.2: {}
 
   p-limit@2.3.0:
-    dependencies:
+    devDependencies:
       p-try: 2.2.0
 
   p-limit@3.1.0:
-    dependencies:
+    devDependencies:
       yocto-queue: 0.1.0
 
   p-locate@3.0.0:
-    dependencies:
+    devDependencies:
       p-limit: 2.3.0
 
   p-locate@5.0.0:
-    dependencies:
+    devDependencies:
       p-limit: 3.1.0
 
   p-try@2.2.0: {}
 
   parent-module@1.0.1:
-    dependencies:
+    devDependencies:
       callsites: 3.1.0
 
   parseurl@1.3.3: {}
@@ -3034,7 +3034,7 @@ snapshots:
   prelude-ls@1.2.1: {}
 
   prettier-linter-helpers@1.0.0:
-    dependencies:
+    devDependencies:
       fast-diff: 1.3.0
 
   prettier@1.19.1: {}
@@ -3042,13 +3042,13 @@ snapshots:
   prettier@3.2.5: {}
 
   prop-types@15.8.1:
-    dependencies:
+    devDependencies:
       loose-envify: 1.4.0
       object-assign: 4.1.1
       react-is: 16.13.1
 
   proxy-addr@2.0.7:
-    dependencies:
+    devDependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
 
@@ -3059,7 +3059,7 @@ snapshots:
   punycode@2.3.1: {}
 
   qs@6.11.0:
-    dependencies:
+    devDependencies:
       side-channel: 1.0.5
 
   qs@6.5.3: {}
@@ -3069,14 +3069,14 @@ snapshots:
   range-parser@1.2.1: {}
 
   raw-body@2.5.1:
-    dependencies:
+    devDependencies:
       bytes: 3.1.2
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
 
   raw-body@2.5.2:
-    dependencies:
+    devDependencies:
       bytes: 3.1.2
       http-errors: 2.0.0
       iconv-lite: 0.4.24
@@ -3085,11 +3085,11 @@ snapshots:
   react-is@16.13.1: {}
 
   readdirp@3.6.0:
-    dependencies:
+    devDependencies:
       picomatch: 2.3.1
 
   reflect.getprototypeof@1.0.5:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
@@ -3099,19 +3099,19 @@ snapshots:
       which-builtin-type: 1.1.3
 
   regexp.prototype.flags@1.5.1:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       set-function-name: 2.0.1
 
   replace-in-file@3.4.4:
-    dependencies:
+    devDependencies:
       chalk: 2.4.2
       glob: 7.2.3
       yargs: 13.3.2
 
   request@2.88.2:
-    dependencies:
+    devDependencies:
       aws-sign2: 0.7.0
       aws4: 1.12.0
       caseless: 0.12.0
@@ -3140,34 +3140,34 @@ snapshots:
   resolve-from@4.0.0: {}
 
   resolve@2.0.0-next.5:
-    dependencies:
+    devDependencies:
       is-core-module: 2.13.1
       path-parse: 1.0.7
       supports-preserve-symlinks-flag: 1.0.0
 
   restore-cursor@2.0.0:
-    dependencies:
+    devDependencies:
       onetime: 2.0.1
       signal-exit: 3.0.7
 
   reusify@1.0.4: {}
 
   rimraf@3.0.2:
-    dependencies:
+    devDependencies:
       glob: 7.2.3
 
   run-async@2.4.1: {}
 
   run-parallel@1.2.0:
-    dependencies:
+    devDependencies:
       queue-microtask: 1.2.3
 
   rxjs@6.6.7:
-    dependencies:
+    devDependencies:
       tslib: 1.14.1
 
   safe-array-concat@1.1.0:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       get-intrinsic: 1.2.4
       has-symbols: 1.0.3
@@ -3176,7 +3176,7 @@ snapshots:
   safe-buffer@5.2.1: {}
 
   safe-regex-test@1.0.3:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       es-errors: 1.3.0
       is-regex: 1.1.4
@@ -3186,11 +3186,11 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.6.0:
-    dependencies:
+    devDependencies:
       lru-cache: 6.0.0
 
   send@0.18.0:
-    dependencies:
+    devDependencies:
       debug: 2.6.9
       depd: 2.0.0
       destroy: 1.2.0
@@ -3204,22 +3204,22 @@ snapshots:
       on-finished: 2.4.1
       range-parser: 1.2.1
       statuses: 2.0.1
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   serve-static@1.15.0:
-    dependencies:
+    devDependencies:
       encodeurl: 1.0.2
       escape-html: 1.0.3
       parseurl: 1.3.3
       send: 0.18.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   set-blocking@2.0.0: {}
 
   set-function-length@1.2.1:
-    dependencies:
+    devDependencies:
       define-data-property: 1.1.2
       es-errors: 1.3.0
       function-bind: 1.1.2
@@ -3228,7 +3228,7 @@ snapshots:
       has-property-descriptors: 1.0.1
 
   set-function-name@2.0.1:
-    dependencies:
+    devDependencies:
       define-data-property: 1.1.2
       functions-have-names: 1.2.3
       has-property-descriptors: 1.0.1
@@ -3236,13 +3236,13 @@ snapshots:
   setprototypeof@1.2.0: {}
 
   shebang-command@2.0.0:
-    dependencies:
+    devDependencies:
       shebang-regex: 3.0.0
 
   shebang-regex@3.0.0: {}
 
   side-channel@1.0.5:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       es-errors: 1.3.0
       get-intrinsic: 1.2.4
@@ -3253,25 +3253,25 @@ snapshots:
   signal-exit@3.0.7: {}
 
   simple-git@3.22.0:
-    dependencies:
+    devDependencies:
       '@kwsites/file-exists': 1.1.1
       '@kwsites/promise-deferred': 1.1.1
       debug: 4.4.0
-    transitivePeerDependencies:
+    transitivePeerdevDependencies:
       - supports-color
 
   simple-update-notifier@2.0.0:
-    dependencies:
+    devDependencies:
       semver: 7.6.0
 
   sparse-bitfield@3.0.3:
-    dependencies:
+    devDependencies:
       memory-pager: 1.5.0
 
   sprintf-js@1.0.3: {}
 
   sshpk@1.18.0:
-    dependencies:
+    devDependencies:
       asn1: 0.2.6
       assert-plus: 1.0.0
       bcrypt-pbkdf: 1.0.2
@@ -3285,18 +3285,18 @@ snapshots:
   statuses@2.0.1: {}
 
   string-width@2.1.1:
-    dependencies:
+    devDependencies:
       is-fullwidth-code-point: 2.0.0
       strip-ansi: 4.0.0
 
   string-width@3.1.0:
-    dependencies:
+    devDependencies:
       emoji-regex: 7.0.3
       is-fullwidth-code-point: 2.0.0
       strip-ansi: 5.2.0
 
   string.prototype.matchall@4.0.10:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
@@ -3308,49 +3308,49 @@ snapshots:
       side-channel: 1.0.5
 
   string.prototype.trim@1.2.8:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   string.prototype.trimend@1.0.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   string.prototype.trimstart@1.0.7:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       define-properties: 1.2.1
       es-abstract: 1.22.3
 
   strip-ansi@4.0.0:
-    dependencies:
+    devDependencies:
       ansi-regex: 3.0.1
 
   strip-ansi@5.2.0:
-    dependencies:
+    devDependencies:
       ansi-regex: 4.1.1
 
   strip-ansi@6.0.1:
-    dependencies:
+    devDependencies:
       ansi-regex: 5.0.1
 
   strip-json-comments@3.1.1: {}
 
   supports-color@5.5.0:
-    dependencies:
+    devDependencies:
       has-flag: 3.0.0
 
   supports-color@7.2.0:
-    dependencies:
+    devDependencies:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
 
   swagger-autogen@2.23.7:
-    dependencies:
+    devDependencies:
       acorn: 7.4.1
       deepmerge: 4.3.1
       glob: 7.2.3
@@ -3359,12 +3359,12 @@ snapshots:
   swagger-ui-dist@5.11.3: {}
 
   swagger-ui-express@5.0.0(express@4.18.2):
-    dependencies:
+    devDependencies:
       express: 4.18.2
       swagger-ui-dist: 5.11.3
 
   synckit@0.8.8:
-    dependencies:
+    devDependencies:
       '@pkgr/core': 0.1.1
       tslib: 2.6.2
 
@@ -3373,30 +3373,30 @@ snapshots:
   through@2.3.8: {}
 
   tmp@0.0.33:
-    dependencies:
+    devDependencies:
       os-tmpdir: 1.0.2
 
   to-regex-range@5.0.1:
-    dependencies:
+    devDependencies:
       is-number: 7.0.0
 
   toidentifier@1.0.1: {}
 
   touch@3.1.0:
-    dependencies:
+    devDependencies:
       nopt: 1.0.10
 
   tough-cookie@2.5.0:
-    dependencies:
+    devDependencies:
       psl: 1.9.0
       punycode: 2.3.1
 
   tr46@4.1.1:
-    dependencies:
+    devDependencies:
       punycode: 2.3.1
 
   tr46@5.0.0:
-    dependencies:
+    devDependencies:
       punycode: 2.3.1
 
   tslib@1.14.1: {}
@@ -3404,37 +3404,37 @@ snapshots:
   tslib@2.6.2: {}
 
   tunnel-agent@0.6.0:
-    dependencies:
+    devDependencies:
       safe-buffer: 5.2.1
 
   tweetnacl@0.14.5: {}
 
   type-check@0.4.0:
-    dependencies:
+    devDependencies:
       prelude-ls: 1.2.1
 
   type-fest@0.20.2: {}
 
   type-is@1.6.18:
-    dependencies:
+    devDependencies:
       media-typer: 0.3.0
       mime-types: 2.1.35
 
   typed-array-buffer@1.0.1:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       es-errors: 1.3.0
       is-typed-array: 1.1.13
 
   typed-array-byte-length@1.0.0:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       for-each: 0.3.3
       has-proto: 1.0.1
       is-typed-array: 1.1.13
 
   typed-array-byte-offset@1.0.0:
-    dependencies:
+    devDependencies:
       available-typed-arrays: 1.0.6
       call-bind: 1.0.6
       for-each: 0.3.3
@@ -3442,13 +3442,13 @@ snapshots:
       is-typed-array: 1.1.13
 
   typed-array-length@1.0.4:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       for-each: 0.3.3
       is-typed-array: 1.1.13
 
   unbox-primitive@1.0.2:
-    dependencies:
+    devDependencies:
       call-bind: 1.0.6
       has-bigints: 1.0.2
       has-symbols: 1.0.3
@@ -3459,7 +3459,7 @@ snapshots:
   unpipe@1.0.0: {}
 
   uri-js@4.4.1:
-    dependencies:
+    devDependencies:
       punycode: 2.3.1
 
   utils-merge@1.0.1: {}
@@ -3473,29 +3473,29 @@ snapshots:
   vary@1.1.2: {}
 
   verror@1.10.0:
-    dependencies:
+    devDependencies:
       assert-plus: 1.0.0
       core-util-is: 1.0.2
       extsprintf: 1.3.0
 
   wcwidth@1.0.1:
-    dependencies:
+    devDependencies:
       defaults: 1.0.4
 
   webidl-conversions@7.0.0: {}
 
   whatwg-url@13.0.0:
-    dependencies:
+    devDependencies:
       tr46: 4.1.1
       webidl-conversions: 7.0.0
 
   whatwg-url@14.1.0:
-    dependencies:
+    devDependencies:
       tr46: 5.0.0
       webidl-conversions: 7.0.0
 
   which-boxed-primitive@1.0.2:
-    dependencies:
+    devDependencies:
       is-bigint: 1.0.4
       is-boolean-object: 1.1.2
       is-number-object: 1.0.7
@@ -3503,7 +3503,7 @@ snapshots:
       is-symbol: 1.0.4
 
   which-builtin-type@1.1.3:
-    dependencies:
+    devDependencies:
       function.prototype.name: 1.1.6
       has-tostringtag: 1.0.2
       is-async-function: 2.0.0
@@ -3518,7 +3518,7 @@ snapshots:
       which-typed-array: 1.1.14
 
   which-collection@1.0.1:
-    dependencies:
+    devDependencies:
       is-map: 2.0.2
       is-set: 2.0.2
       is-weakmap: 2.0.1
@@ -3527,7 +3527,7 @@ snapshots:
   which-module@2.0.1: {}
 
   which-typed-array@1.1.14:
-    dependencies:
+    devDependencies:
       available-typed-arrays: 1.0.6
       call-bind: 1.0.6
       for-each: 0.3.3
@@ -3535,13 +3535,13 @@ snapshots:
       has-tostringtag: 1.0.2
 
   which@2.0.2:
-    dependencies:
+    devDependencies:
       isexe: 2.0.0
 
   word-wrap@1.2.5: {}
 
   wrap-ansi@5.1.0:
-    dependencies:
+    devDependencies:
       ansi-styles: 3.2.1
       string-width: 3.1.0
       strip-ansi: 5.2.0
@@ -3549,13 +3549,13 @@ snapshots:
   wrappy@1.0.2: {}
 
   write-yaml@1.0.0:
-    dependencies:
+    devDependencies:
       extend-shallow: 2.0.1
       js-yaml: 3.14.1
       write: 0.3.3
 
   write@0.3.3:
-    dependencies:
+    devDependencies:
       fs-exists-sync: 0.1.0
       mkdirp: 0.5.6
 
@@ -3564,12 +3564,12 @@ snapshots:
   yallist@4.0.0: {}
 
   yargs-parser@13.1.2:
-    dependencies:
+    devDependencies:
       camelcase: 5.3.1
       decamelize: 1.2.0
 
   yargs@13.3.2:
-    dependencies:
+    devDependencies:
       cliui: 5.0.0
       find-up: 3.0.0
       get-caller-file: 2.0.5
